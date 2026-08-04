@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UOAether — Shard Changelog</title>
+<style>
+  :root {
+    --bg: #14161c;
+    --panel: #1c1f28;
+    --text: #d8dbe4;
+    --muted: #9aa0b0;
+    --accent: #c9a15a;
+    --accent-soft: #8b6f3a;
+    --border: #2c3040;
+    --code-bg: #262a36;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+    line-height: 1.65;
+  }
+  header {
+    padding: 2.5rem 1.5rem 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #1a1d26 0%, var(--bg) 100%);
+  }
+  header h1 {
+    margin: 0 0 0.4rem;
+    font-size: 1.8rem;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+  h1 { display: none; } /* the doc's own h1 is redundant with header */
+  h2 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-top: 3rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-soft);
+    letter-spacing: 0.02em;
+  }
+  h2:first-of-type { margin-top: 0; }
+  p strong {
+    display: block;
+    color: #e8c98a;
+    font-size: 1.05rem;
+    margin: 1.5rem 0 0.5rem;
+  }
+  ul {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem 1rem 2.5rem;
+    margin: 0 0 1rem;
+  }
+  li {
+    margin: 0.5rem 0;
+  }
+  li strong { color: #e8c98a; }
+  code {
+    background: var(--code-bg);
+    color: #9fd0c7;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.88em;
+    font-family: "Consolas", "Courier New", monospace;
+  }
+  em { color: var(--accent); font-style: italic; }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0;
+  }
+  a { color: var(--accent); }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>UOAether — Shard Changelog</h1>
+  <p>A running record of custom systems work: Barding, Taming, and World Building</p>
+</header>
+<div class="container">
+<h1>Shard Changelog — Consolidated Summary</h1>
+<h2>Barding (Peacemaking / Provocation / Discordance)</h2>
+<p><strong>Bugs found and fixed in existing shard code</strong></p>
+<ul>
+<li><code>BaseAI.DoBardProvoked()</code> only cleared <code>BardProvoked</code> if the bard was gone/out of range — the custom <code>ProvokeTimers</code> expiry cleared <code>Combatant</code>/<code>Warmode</code> but left <code>BardProvoked</code> true, causing instant re-provoke. Fixed by also clearing <code>BardProvoked</code>, <code>BardMaster</code>, <code>BardTarget</code> in that expiry callback.</li>
+<li><code>BaseCreature.Provoke()</code> hardcoded <code>BardEndTime</code> to +30s regardless of the calculated duration (the custom <code>ProvokeTimers</code> table was the real authority anyway).</li>
+<li><code>DoBardPacified()</code> confirmed clean — no fix needed.</li>
+</ul>
+<p><strong>Bard Break mechanic — complete and confirmed working</strong></p>
+<ul>
+<li>Grace window after a successful peace/provoke, then a 2s tick that rolls barding vs. mob difficulty for a chance to break free.</li>
+<li>Grace window: 5s → 3s; does <strong>not</strong> restack on re-barding — only granted on first entering control or after a break.</li>
+<li>Post-break immunity: 5s flat (per-mob knob available for higher-tier mobs).</li>
+<li>On break: overhead message "<em>Regains Focus</em>" + sound <code>0x1E3</code> (matches Night Sight cast sound).</li>
+<li>Confirmed working via live test and a fresh server restart — an earlier "breaks were off until debug toggled" report turned out to be a false correlation (Debug only ever controlled message spam, never the hardcoded-true Enabled flag).</li>
+<li>Observed peace-chance variance on "the same" mob (e.g. a Balron shifting 50%→37% between tests) traced to per-spawn <code>HitsMax</code> differences feeding <code>GetBaseDifficulty()</code> — not a bug.</li>
+</ul>
+<p><strong>Magic Instrument loot system (new)</strong></p>
+<ul>
+<li><code>InstrumentGrade</code> enum (Normal/Surpassingly/Eminently/Exceedingly/Supremely) — flat bard-skill bonus via <code>GetDifficultyFor</code> (0/2/5/8/12), drop odds scaled by the dying mob's Fame/difficulty (near-never Supremely on weak mobs, up to 50% on the hardest).</li>
+<li><code>InstrumentDurability</code> enum (Normal/Durable/Substantial/Massive/Fortified/Indestructible), +100 max uses per tier, rolled independently of Grade.</li>
+<li>Composed magic-item names (e.g. "a massive supremely harmonious lute"); "Harmonious" used in place of "Accurate" for grade wording.</li>
+<li>Drops tuned generous on request: Indestructible 1%→3%, mundane Normal 55%→30%; low-end Grade table loosened from 85% Normal/0% Supremely to 50%/2%. Base instrument uses bumped +300 across the board.</li>
+<li>Added <code>BonusBardSkill</code> field for uniques exceeding Supremely's +12 cap.</li>
+<li>First named unique: <strong>Fantasia</strong> (Lute, +20 BonusBardSkill, 3000 uses, deep purple hue) — 0.05% from top-tier/red-named mobs, 3% from champion spawn bosses, gated independently of normal loot rolls.</li>
+</ul>
+<hr />
+<h2>Taming (Custom Pet System)</h2>
+<p><strong>Goal:</strong> Role-based controllable pets (Tank / Ranged / Melee) built on the Insidious Dungeon ability framework, with kill-based AnimalTaming skill gain.</p>
+<p><strong>Ability cooldown/trigger-chance refactor</strong></p>
+<ul>
+<li><code>CustomAbility.cs</code> now supports settable trigger chance/cooldown (<code>SetTriggerChance()</code>/<code>SetCooldown()</code>), persisted via serialization. All 30 ability subclasses updated — shared defaults kept at original values so Insidious Dungeon's locked mobs weren't retuned; tightened cooldowns applied per-pet at construction instead.</li>
+</ul>
+<p><strong>Pet roster — now 14 pets total</strong></p>
+<ul>
+<li>Tank: EmberWarden, Goatox (Charge removed after aggro conflicts with other Charge-using mobs — replaced with real Taunt + PetClass.Tank passive healing).</li>
+<li>Melee: Bloodfang, plus 8 elemental generalist pairs (Frostmaw/Icefang, Venomcoil/Toxifang, Grimwyrm/Direfang, Sunwyrm/Sunfang) — left unclassified (PetClass.None) for now.</li>
+<li>Ranged/Caster: TempestDrake, Mysticwyrm, Sagefang — Int-scaled, low-HP tradeoff, fully non-mana-dependent by design.</li>
+<li>Repeated <code>CanFly = true</code>-in-constructor mistake (get-only override) caught and fixed multiple times across the roster before shipping.</li>
+<li>Venomcoil/Toxifang (deliberately the highest-damage elemental pair) rebalanced via <strong>-35% HP</strong> instead of a damage nerf, keeping their damage identity intact.</li>
+</ul>
+<p><strong>Leveling / stat system</strong></p>
+<ul>
+<li>Isolated into a new <code>TamingCreature : AbilityCreature</code> subclass rather than polluting shared <code>AbilityCreature.cs</code> (same mistake class as the earlier ability-cooldown-defaults issue, caught one level up the hierarchy).</li>
+<li>20 unspent points per level (loosened from 1) + XP/level-up system messages.</li>
+<li>Respec: <code>PetRespecStone.cs</code>, consumable, unlimited uses, refunds Str/Dex/Int, <code>LootType.Blessed</code>. Shard-wide drop hook added to <code>BaseCreature.GenerateLoot()</code>, scaled by Fame (~0.35% weak → 5% cap around dragon-tier).</li>
+<li><strong>Bug fixed:</strong> Stam/Mana collapsed to 1 on the first Dex/Int point spent — <code>SetStam</code>/<code>SetMana</code> were never called (unlike <code>SetHits</code>), leaving the seed at 0 and falling back to a getter that broke the instant the seed left 0. Fixed centrally in <code>TamingCreature.SpendPoint()</code> for the whole roster (present and future pets).</li>
+<li>Int-scaling wiring bug: pets used <code>AddCustomAbility</code> instead of the Int-scaling <code>AddScalableAbility</code> hook, making Int investment dead code — fixed roster-wide. EmberWarden's high base Int (backwards from "Int rewards Ranged" intent) still flagged, unresolved.</li>
+<li>New <code>PetClass</code> enum (None/Tank/Ranged/Melee), version-gated serialization. Only Tank has real mechanics so far: healing bonus via <code>Mobile.Heal()</code>'s <code>OnHeal</code> hook, raised from +20% → <strong>+60% total</strong> on request. <code>AnimalLoreGump.cs</code> shows a Class row when set.</li>
+</ul>
+<p><strong>Movement / AI — extensive iteration</strong></p>
+<ul>
+<li>Fixed pet speed, follow-run-threshold, and Recall teleport for unbonded pets (Dex-based speed scaling shard-wide, a fragile range-scan in <code>TeleportPets</code>, and an <code>onlyBonded=true</code> flag blocking unbonded pets).</li>
+<li><strong>Kiting root cause:</strong> <code>MageAI.RunTo()</code> only retreats when <code>SmartAI</code> (gated by <code>MagicalAbility.MageryMastery</code>, distinct from plain <code>Magery</code>) is true — none of the ranged pets had it set. Added <code>MageryMastery</code> to all three.</li>
+<li>Found <code>RangeFight</code> hardcoded to 1 (melee range) on all ranged pets, so they always closed to melee first — raised to 8, then narrowed to 4 after overcorrection (pets fleeing to max range), then finally replaced with a custom <code>NoCastMageAI.RunTo()</code> override: approach to <code>RangeFight</code> and hold, <strong>never retreat</strong>, positioning fully tamer-command-driven. <code>RangeFight</code> raised back to 10 once retreat was structurally impossible.</li>
+<li>Closed two real teleport-spell leaks (<code>DoActionCombat</code>'s teleport branch — reachable due to <code>Core.SA</code>/<code>Core.TOL</code> being true on this shard, not blocked by low Magery as first assumed; and <code>OnFailedMove</code>'s unconditional 10% teleport-when-stuck roll) via <code>NoCastMageAI</code> forcing <code>CheckCanCastMagery()</code> false — also guarantees these pets never depend on mana at all.</li>
+<li><strong>LOS bug found:</strong> none of the 30 custom ability files checked line-of-sight (pure spatial radius), causing abilities to hit through walls and cause "unprovoked" aggro in adjacent rooms. Fixed by adding an LOS check to the shared <code>IsValidAbilityTarget</code> helper (covers 12+ files at once), plus 3 files with their own inline dual-branch filters (<code>FlameStrikeCone</code>, <code>FlameStrikeLine</code>, <code>ForkedFlameStrike</code>). Not yet audited: <code>Fear.cs</code>, <code>HealAllies.cs</code>, <code>ToxicSpores.cs</code>, <code>TempestItem</code>.</li>
+<li>Mage pet damage buffed twice on feedback: +18%, then a further +15% stacked on top (final: TempestDrake Zap 13-17/BarrageOfBolts 14-20/Thunderstorm 9-15; Mysticwyrm FlameStrikeTargeted 17-24/FlameStrikeLine 20-24/ForkedFlameStrike 22-28; Sagefang FlameStrikeTargeted 15-21/Firebolt 8-14).</li>
+<li>Sagefang still felt weak after both buffs but explicitly should never exceed Mysticwyrm — fixed by giving it a <strong>3rd ability</strong> (Zap, 10-15, 6s cd) instead of inflating existing numbers, since it was stuck at the drake-tier 2-ability convention while TempestDrake (also drake-tier) already had 3.</li>
+</ul>
+<p><strong>Friendly-fire bug (systemic, shared with Insidious Dungeon abilities)</strong></p>
+<ul>
+<li>12 AOE ability files shared a wild-caster-only targeting filter that didn't account for a tamed caster hitting its own owner/sibling pets. Added shared <code>IsValidAbilityTarget()</code> helper, patched 10 files; 2 confirmed pre-existing real bugs (ToxicRain/Thunderstorm hitting sibling pets). Root cause of the originally reported Sunwyrm/MeteorStrike self-damage bug remains unresolved — lives in the unaudited companion <code>MeteorItem</code> class.</li>
+</ul>
+<p><strong>New abilities &amp; commands</strong></p>
+<ul>
+<li><strong>Taunt.cs</strong> — new CustomAbility (8 range, 0.5 trigger, 15s cooldown, 6s hold): forces a target to attack the caster via a recurring 1s Timer that re-asserts <code>Combatant</code>/<code>FocusMob</code> (a single assignment doesn't hold since AI re-evaluates each tick). Not added to the shared 30-ability registry array since every pet instantiates directly. Wired into Goatox (its real replacement for the removed Charge) and EmberWarden (added as a genuine 3rd ability alongside Grapple, which was renamed from <code>taunt</code> to <code>pull</code> to avoid confusion).</li>
+<li><strong>PetPull</strong> ([PetPull], player-usable): 3-second overhead countdown, then calls the same <code>TeleportPets</code> method Recall.cs uses. Later refactored into a shared static <code>DoPetPull()</code> so both the command and a new right-click context-menu entry call the same code.</li>
+<li><strong>[dip</strong> (emergency escape) now also instantly pulls pets to the same destination (no countdown, unlike PetPull) by calling <code>TeleportPets</code> directly after the player's own teleport.</li>
+<li><strong>(tameable) tag</strong> added shard-wide (not just custom pets) — <code>BaseCreature.cs</code>'s <code>AddNameProperties</code>/<code>OnSingleClick</code>, gated on <code>!Controlled &amp;&amp; Tamable &amp;&amp; Alive</code>, following the exact existing (summoned)/(bonded)/(tame) pattern. Applies automatically to every tameable creature on the shard.</li>
+</ul>
+<p><strong>Admin tooling</strong></p>
+<ul>
+<li><code>PetAdminGump.cs</code> ([PetAdmin]): Str/Dex/Int/Level/XP/UnspentPoints direct-set + instant respec button, links to <code>SetSkillGump</code>. <code>PetLevel</code> setter now correctly grants points-per-level even when set directly via [props.</li>
+<li><code>CustomAdminLauncherGump.cs</code> ([MooseAdmin]): shortcut launcher; restructured to support a "Spawn Tools" header with indented sub-buttons (Insidious Spawner, Pets).</li>
+<li><code>PetSpawnGump.cs</code> ([PetSpawn]): lists all 14 pets, resolves type by name via <code>ScriptCompiler.FindTypeByName</code> (one-line addition for future pets), spawns and auto-assigns to a targeted owner, sets <code>ControlOrder=Follow</code> by default.</li>
+<li>Standing convention: every new custom gump gets a shortcut added to <code>CustomAdminLauncherGump.cs</code> as part of delivery.</li>
+</ul>
+<hr />
+<h2>World Building — Insidious Dungeon (Custom Undead/Demon Mob Roster)</h2>
+<p><strong>Roster overview — now 32 mobs (all on Massapequa's Custom Abilities 3.0 framework)</strong></p>
+<ul>
+<li>Undead wing (tiers 1–5): GraveWarden, HollowWraith, InsidiousLich, DeathElemental, SepulcherDragon (dungeon boss — renamed from a name colliding with ServUO's stock <code>SkeletalDragon</code>).</li>
+<li>Demon/gargoyle wing (tiers 6–8): BoundGargoyle, AbyssalDrake, Wyrmlord.</li>
+<li>Daemon wing (tiers 9–11): CinderBrute (renamed from PitFiend — stock collision), InfernalDaemon, Doomlord (renamed from Archdaemon after it turned out ServUO ships its own stock Archdaemon class that silently absorbed <code>[add archdaemon</code>, causing a long-running low-gold mystery eventually root-caused via grep).</li>
+<li>Gargoyle mini-pack (siblings to BoundGargoyle, same power band): GraniteGargoyle, StormwingGargoyle, DreadwingGargoyle, RuneboundGargoyle.</li>
+<li>17-mob medium-tier expansion (same difficulty band as GraveWarden/GraniteGargoyle/CinderBrute, +100g/~10% more HP), built on specific body IDs — all renamed after discovering the original flavor names were literal UO client body-graphic names (a second, distinct collision risk): Chitterfang, Gorgemaw, Stitchbrute, Rendclaw, Thornreaper, Marrowfiend, Grimjaw, Nightward, Umbralurker, Bloodmaul, Scorchguard, Rotswarm, Riftcaller, Nightthrone, Chasmborn, Gloomstalker, Veilrender.</li>
+<li>Body-type sprite swaps: HollowWraith → 748, InsidiousLich → 747 (moving off placeholder bodies toward extracted real UO sprite art).</li>
+</ul>
+<p><strong>Recurring naming-collision lesson</strong></p>
+<ul>
+<li>Standing practice: grep <code>Scripts/</code> for <code>class &lt;Name&gt;</code> before shipping any new mob — ServUO's stock bestiary (Pit Fiend, Daemon, Balron, Skeletal Dragon, Archdaemon) is the recurring collision risk, sometimes silent (no compile error, silently resolves to the stock class) rather than obvious.</li>
+</ul>
+<p><strong>Design philosophy settled</strong></p>
+<ul>
+<li>Base melee/spell damage is the real threat; custom abilities are low-damage visual spectacle, not primary damage.</li>
+<li>Avoid abilities that lock the player out of control (cataloged: IcePrison, Snare, Zap, ThrowBoulder).</li>
+<li>Positional/avoidable zone abilities (e.g. RagingTempest's persistent vortex) confirmed as a favorite, keeper pattern.</li>
+<li>Heavy poison effects reserved for flavor-specific use only, not a general difficulty lever.</li>
+<li>Rejected reverse-engineering <code>GetBaseDifficulty()</code> for stat design — build for "fun and fightable" first.</li>
+</ul>
+<p><strong>Loot system — long iterative history, now settled</strong></p>
+<ul>
+<li>Root-caused and fixed a shard-wide double-gold-drop bug (<code>GenerateLoot()</code> firing twice; unguarded <code>PackGold</code> paid out both times).</li>
+<li>Fixed a structural gap: none of the roster's original loot packs included any weapon/armor pool at all.</li>
+<li>Went through several generosity passes (tiering upgrades, then a same-tier-repeat approach for more item rolls) before adopting the stock <strong>Balron pattern</strong> as the final approach: layering two <em>different</em> pack tiers with no explicit <code>PackGold</code> at all —</li>
+<li>entry tier = Average×2 + Meager×1</li>
+<li>upper-mid tier = Rich×2 + Average×1</li>
+<li>top tier (Wyrmlord/SepulcherDragon/Doomlord) = FilthyRich×2 + Rich×1</li>
+<li>SepulcherDragon further boosted to <strong>FilthyRich×3 + Rich×2</strong> as the true dungeon boss, now visibly outclassing its tier-mates.</li>
+<li>UltraRich deliberately held in reserve for a future power-creep ceiling mob.</li>
+<li>Discussed (and paused, pending concrete before/after examples) a proposal to give Insidious Dungeon mobs better treatment from the shard-wide loot sanitizer via a virtual property, without breaking its unified block-list.</li>
+</ul>
+<p><strong>Shard config fixes discovered along the way</strong></p>
+<ul>
+<li>Global HP multiplier confirmed at 1.4x; <code>GetBaseDifficulty()</code> divisor already matched.</li>
+<li><code>ResistanceType</code> has no <code>Holy</code> member — fixed a mob (<code>RuneboundGargoyle</code>) that mistakenly used it, mapped to Energy instead.</li>
+<li>Notoriety: <code>AlwaysMurderer</code> added to the two true bosses (red-named), <code>AlwaysAttackable</code> to the rest (grey-from-spawn), since humanoid-bodied mobs otherwise spawn blue/innocent by default.</li>
+<li>Full 30-ability sweep for a virtual/override mismatch bug — 3 of 30 abilities were wrong and patched.</li>
+<li>Framework patch to <code>CustomAbilitiesList.cs</code>/<code>AbilityCreature.cs</code>/<code>SummonMinion.cs</code> made the ability pool reusable across mobs (previously capped near 1 use per ability class); save/load round-trip verified working after a server restart.</li>
+<li>Second compile error class found on the daemon wing: <code>CanFly</code>/<code>CanRummageCorpses</code>/<code>PoisonImmune</code> are get-only overridden properties (matching stock <code>Daemon.cs</code>), not settable — fixed across CinderBrute/InfernalDaemon/Archdaemon.</li>
+<li>Daemon wing hues corrected against a real numbered hue chart after two wrong initial picks (one invalid slot, one wrong tone): CinderBrute 342, InfernalDaemon 1258, Archdaemon/Doomlord 1157.</li>
+</ul>
+<p><strong>Testing status</strong></p>
+<ul>
+<li>InsidiousLich and GraveWarden: locked/perfect.</li>
+<li>DeathElemental: very good, damage possibly slightly high, more testing planned.</li>
+<li>HollowWraith: still a bit hot on damage — all early testing used a character with <strong>no Magic Resist</strong>, retest pending.</li>
+<li>BoundGargoyle/AbyssalDrake/Wyrmlord: tested, generally positive (Wyrmlord's HP raised 440-520 → 530-620 after feeling low for its loot).</li>
+<li>SepulcherDragon: tough for melee but became manageable once Aether was maxed — read as confirmation the shard's Aether systems work as intended for PVE.</li>
+<li>Daemon wing: tested lightly, damage a bit high, deferred retuning to higher-end character testing.</li>
+<li>Gargoyle mini-pack and 17-mob medium-tier batch: built, not yet tested.</li>
+<li>Planned test matrix: Magic Resist + Parry character, and a bard using Discord with no Magic Resist.</li>
+<li>Interested in custom high-end loot (armor sets, named weapons) down the line, deferred for now.</li>
+</ul>
+</div>
+<footer>
+  UOAether Custom Shard — Changelog generated from development notes
+</footer>
+</body>
+</html>
