@@ -131,7 +131,7 @@
 </ul>
 <hr />
 <h2>Taming (Custom Pet System)</h2>
-<p><strong>Goal:</strong> Role-based controllable pets (Tank / Ranged / Melee) built on the Insidious Dungeon ability framework, with kill-based AnimalTaming skill gain.</p>
+
 <p><strong>Ability cooldown/trigger-chance refactor</strong></p>
 <ul>
 <li><code>CustomAbility.cs</code> now supports settable trigger chance/cooldown (<code>SetTriggerChance()</code>/<code>SetCooldown()</code>), persisted via serialization. All 30 ability subclasses updated — shared defaults kept at original values so Insidious Dungeon's locked mobs weren't retuned; tightened cooldowns applied per-pet at construction instead.</li>
