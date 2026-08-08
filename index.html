@@ -3,244 +3,643 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UOAether — Shard Changelog</title>
+<title>UOAether — Player Wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #14161c;
-    --panel: #1c1f28;
-    --text: #d8dbe4;
-    --muted: #9aa0b0;
-    --accent: #c9a15a;
-    --accent-soft: #8b6f3a;
-    --border: #2c3040;
-    --code-bg: #262a36;
+  :root{
+    --bg: #0a0c12;
+    --bg-alt: #0d1017;
+    --panel: #11141c;
+    --panel-border: #1f2430;
+    --text: #dfe3ee;
+    --text-dim: #8b93a8;
+    --text-faint: #5b6479;
+    --rule: #232838;
+
+    --glow-a: #8b5cf6;   /* violet */
+    --glow-b: #22d3ee;   /* cyan */
+
+    --terra:     #b3874a;
+    --cadence:   #e8b84b;
+    --celestial: #7fb2e5;
+    --eldritch:  #a06fe0;
+    --sylvan:    #6fbf7d;
+    --tempest:   #46d1c9;
+
+    --radius: 10px;
+    --content-w: 720px;
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: var(--bg);
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(1100px 600px at 15% -10%, rgba(139,92,246,0.10), transparent 60%),
+      radial-gradient(900px 500px at 90% 10%, rgba(34,211,238,0.07), transparent 55%),
+      var(--bg);
     color: var(--text);
-    font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
-    line-height: 1.65;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
-  header {
-    padding: 2.5rem 1.5rem 1.5rem;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, #1a1d26 0%, var(--bg) 100%);
+
+  a{ color: inherit; }
+
+  ::selection{ background: rgba(139,92,246,0.35); }
+
+  /* ---------- Layout shell ---------- */
+  .shell{
+    display:flex;
+    max-width: 1240px;
+    margin: 0 auto;
+    align-items: flex-start;
   }
-  header h1 {
-    margin: 0 0 0.4rem;
-    font-size: 1.8rem;
-    letter-spacing: 0.03em;
-    color: var(--accent);
+
+  /* ---------- Sidebar / TOC ---------- */
+  .sidebar{
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 260px;
+    flex: 0 0 260px;
+    padding: 40px 20px 40px 32px;
+    overflow-y: auto;
+    border-right: 1px solid var(--panel-border);
   }
-  header p {
+  .sidebar-mark{
+    font-family:'Cinzel', serif;
+    font-weight:600;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .sidebar-sub{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 28px;
+  }
+  .toc{ list-style:none; margin:0; padding:0; }
+  .toc li{ margin:0; }
+  .toc a{
+    display:block;
+    text-decoration:none;
+    color: var(--text-dim);
+    font-size: 0.86rem;
+    padding: 7px 10px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .toc a:hover{
+    color: var(--text);
+    background: rgba(139,92,246,0.06);
+  }
+  .toc a.active{
+    color: var(--text);
+    border-left-color: var(--glow-b);
+    background: rgba(34,211,238,0.06);
+  }
+  .toc-num{
+    font-family:'JetBrains Mono', monospace;
+    color: var(--text-faint);
+    margin-right: 8px;
+    font-size: 0.78rem;
+  }
+
+  .menu-toggle{ display:none; }
+
+  /* ---------- Main content ---------- */
+  main{
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0 28px 120px;
+  }
+
+  .content-inner{
+    max-width: var(--content-w);
+    margin: 0 auto;
+    padding-top: 8px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width: var(--content-w);
+    margin: 0 auto;
+    padding: 76px 0 40px;
+    text-align: left;
+  }
+  .hero-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 18px;
+  }
+  .hero h1{
+    font-family:'Cinzel', serif;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    letter-spacing: 0.02em;
+    margin: 0 0 18px;
+    line-height: 1.05;
+    background: linear-gradient(100deg,
+      var(--terra), var(--cadence), var(--celestial),
+      var(--eldritch), var(--sylvan), var(--tempest), var(--terra));
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .hero h1{ animation: aether-shift 14s ease-in-out infinite; }
+  }
+  @keyframes aether-shift{
+    0%{ background-position: 0% 50%; }
+    50%{ background-position: 100% 50%; }
+    100%{ background-position: 0% 50%; }
+  }
+  .hero p{
+    color: var(--text-dim);
+    font-size: 1.08rem;
+    max-width: 54ch;
     margin: 0;
-    color: var(--muted);
+  }
+  .hero-rule{
+    margin-top: 34px;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--rule), transparent);
+  }
+
+  /* ---------- Sections ---------- */
+  section{
+    padding: 56px 0;
+    border-bottom: 1px solid var(--rule);
+    scroll-margin-top: 24px;
+  }
+  section:last-of-type{ border-bottom: none; }
+
+  .section-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+  h2{
+    font-family:'Cinzel', serif;
+    font-weight:600;
+    font-size: 1.7rem;
+    letter-spacing: 0.01em;
+    margin: 0 0 20px;
+    color: var(--text);
+  }
+  h3{
+    font-family:'Cinzel', serif;
+    font-weight:600;
+    font-size: 1.08rem;
+    color: var(--text);
+    margin: 30px 0 12px;
+    letter-spacing: 0.01em;
+  }
+  p{ margin: 0 0 16px; color: var(--text); }
+  section > p:first-of-type{ color: var(--text-dim); }
+
+  ul, ol{ margin: 0 0 16px; padding-left: 1.3em; }
+  li{ margin-bottom: 9px; }
+  li::marker{ color: var(--glow-b); }
+
+  strong{ color: #fff; font-weight: 600; }
+
+  code{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.86em;
+    background: rgba(139,92,246,0.12);
+    border: 1px solid rgba(139,92,246,0.25);
+    color: #d8c8ff;
+    padding: 0.1em 0.45em;
+    border-radius: 5px;
+  }
+
+  /* ---------- Aether type legend ---------- */
+  .aether-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+    margin: 20px 0 28px;
+  }
+  .aether-chip{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+  }
+  .aether-dot{
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    flex: 0 0 11px;
+    box-shadow: 0 0 10px 1px currentColor;
+  }
+  .aether-chip .name{
+    font-family:'Cinzel', serif;
+    font-weight: 600;
+    font-size: 0.88rem;
+  }
+  .aether-chip .lean{
+    display:block;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .terra    { color: var(--terra); }
+  .cadence  { color: var(--cadence); }
+  .celestial{ color: var(--celestial); }
+  .eldritch { color: var(--eldritch); }
+  .sylvan   { color: var(--sylvan); }
+  .tempest  { color: var(--tempest); }
+
+  /* ---------- Callout ---------- */
+  .callout{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid var(--glow-b);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 20px 0;
+    color: var(--text-dim);
     font-size: 0.95rem;
   }
-  .container {
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-  }
-  h1 { display: none; } /* the doc's own h1 is redundant with header */
-  h2 {
-    color: var(--accent);
-    font-size: 1.5rem;
-    margin-top: 3rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--accent-soft);
-    letter-spacing: 0.02em;
-  }
-  h2:first-of-type { margin-top: 0; }
-  p strong {
-    display: block;
-    color: #e8c98a;
-    font-size: 1.05rem;
-    margin: 1.5rem 0 0.5rem;
-  }
-  ul {
+  .callout strong{ color: var(--text); }
+
+  /* ---------- Region cards ---------- */
+  .region{
     background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem 1.5rem 1rem 2.5rem;
-    margin: 0 0 1rem;
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 14px;
   }
-  li {
-    margin: 0.5rem 0;
+  .region h3{ margin: 0 0 8px; }
+  .region p{ margin: 0; color: var(--text-dim); font-size: 0.95rem; }
+
+  /* ---------- Command table ---------- */
+  .cmd-table-wrap{
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--panel);
   }
-  li strong { color: #e8c98a; }
-  code {
-    background: var(--code-bg);
-    color: #9fd0c7;
-    padding: 0.1rem 0.35rem;
-    border-radius: 4px;
-    font-size: 0.88em;
-    font-family: "Consolas", "Courier New", monospace;
+  table{ width: 100%; border-collapse: collapse; }
+  thead th{
+    text-align: left;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--panel-border);
+    background: var(--bg-alt);
   }
-  em { color: var(--accent); font-style: italic; }
-  hr {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 3rem 0;
+  tbody td{
+    padding: 13px 18px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.92rem;
+    color: var(--text-dim);
+    vertical-align: top;
   }
-  a { color: var(--accent); }
-  footer {
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.85rem;
-    padding: 2rem 1rem;
-    border-top: 1px solid var(--border);
+  tbody tr:last-child td{ border-bottom: none; }
+  .cmd{
+    font-family:'JetBrains Mono', monospace;
+    color: var(--glow-b);
+    white-space: nowrap;
+    font-size: 0.88rem;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    max-width: var(--content-w);
+    margin: 0 auto;
+    padding: 40px 0 0;
+    color: var(--text-faint);
+    font-size: 0.8rem;
+    font-family:'JetBrains Mono', monospace;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px){
+    .sidebar{
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 40;
+      background: var(--bg);
+      transform: translateX(-100%);
+      transition: transform .25s ease;
+      width: 78vw;
+      max-width: 300px;
+      box-shadow: 20px 0 40px rgba(0,0,0,0.4);
+    }
+    .sidebar.open{ transform: translateX(0); }
+    main{ padding: 0 20px 100px; }
+    .hero{ padding-top: 64px; }
+    .menu-toggle{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      position: fixed;
+      top: 18px; left: 18px;
+      z-index: 50;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      color: var(--text);
+      font-family:'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 9px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .menu-toggle:before{
+      content:'';
+      width: 12px; height: 2px;
+      background: var(--glow-b);
+      box-shadow: 0 -4px var(--glow-b), 0 4px var(--glow-b);
+    }
+    .backdrop{
+      display:none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 30;
+    }
+    .backdrop.show{ display:block; }
   }
 </style>
 </head>
 <body>
-<header>
-  <h1>UOAether — Shard Changelog</h1>
-  <center><p style="font-size: 34px;">UOAether</p></center>
-  <p>For more info and updates, check discord: https://discord.gg/Bp9sZnzgRT</p>
-</header>
-<div class="container">
-<h1>Shard Changelog — Consolidated Summary</h1>
-<h2>Barding (Peacemaking / Provocation / Discordance)</h2>
-<p><strong>Bugs found and fixed in existing shard code</strong></p>
-<ul>
-<li><code>BaseAI.DoBardProvoked()</code> only cleared <code>BardProvoked</code> if the bard was gone/out of range — the custom <code>ProvokeTimers</code> expiry cleared <code>Combatant</code>/<code>Warmode</code> but left <code>BardProvoked</code> true, causing instant re-provoke. Fixed by also clearing <code>BardProvoked</code>, <code>BardMaster</code>, <code>BardTarget</code> in that expiry callback.</li>
-<li><code>BaseCreature.Provoke()</code> hardcoded <code>BardEndTime</code> to +30s regardless of the calculated duration (the custom <code>ProvokeTimers</code> table was the real authority anyway).</li>
-<li><code>DoBardPacified()</code> confirmed clean — no fix needed.</li>
-</ul>
-<p><strong>Bard Break mechanic — complete and confirmed working</strong></p>
-<ul>
-<li>Grace window after a successful peace/provoke, then a 2s tick that rolls barding vs. mob difficulty for a chance to break free.</li>
-<li>Grace window: 5s → 3s; does <strong>not</strong> restack on re-barding — only granted on first entering control or after a break.</li>
-<li>Post-break immunity: 5s flat (per-mob knob available for higher-tier mobs).</li>
-<li>On break: overhead message "<em>Regains Focus</em>" + sound <code>0x1E3</code> (matches Night Sight cast sound).</li>
-<li>Confirmed working via live test and a fresh server restart — an earlier "breaks were off until debug toggled" report turned out to be a false correlation (Debug only ever controlled message spam, never the hardcoded-true Enabled flag).</li>
-<li>Observed peace-chance variance on "the same" mob (e.g. a Balron shifting 50%→37% between tests) traced to per-spawn <code>HitsMax</code> differences feeding <code>GetBaseDifficulty()</code> — not a bug.</li>
-</ul>
-<p><strong>Magic Instrument loot system (new)</strong></p>
-<ul>
-<li><code>InstrumentGrade</code> enum (Normal/Surpassingly/Eminently/Exceedingly/Supremely) — flat bard-skill bonus via <code>GetDifficultyFor</code> (0/2/5/8/12), drop odds scaled by the dying mob's Fame/difficulty (near-never Supremely on weak mobs, up to 50% on the hardest).</li>
-<li><code>InstrumentDurability</code> enum (Normal/Durable/Substantial/Massive/Fortified/Indestructible), +100 max uses per tier, rolled independently of Grade.</li>
-<li>Composed magic-item names (e.g. "a massive supremely harmonious lute"); "Harmonious" used in place of "Accurate" for grade wording.</li>
-<li>Drops tuned generous on request: Indestructible 1%→3%, mundane Normal 55%→30%; low-end Grade table loosened from 85% Normal/0% Supremely to 50%/2%. Base instrument uses bumped +300 across the board.</li>
-<li>Added <code>BonusBardSkill</code> field for uniques exceeding Supremely's +12 cap.</li>
-<li>First named unique: <strong>Fantasia</strong> (Lute, +20 BonusBardSkill, 3000 uses, deep purple hue) — 0.05% from top-tier/red-named mobs, 3% from champion spawn bosses, gated independently of normal loot rolls.</li>
-</ul>
-<hr />
-<h2>Taming (Custom Pet System)</h2>
 
-<p><strong>Ability cooldown/trigger-chance refactor</strong></p>
-<ul>
-<li><code>CustomAbility.cs</code> now supports settable trigger chance/cooldown (<code>SetTriggerChance()</code>/<code>SetCooldown()</code>), persisted via serialization. All 30 ability subclasses updated — shared defaults kept at original values so Insidious Dungeon's locked mobs weren't retuned; tightened cooldowns applied per-pet at construction instead.</li>
-</ul>
-<p><strong>Pet roster — now 14 pets total</strong></p>
-<ul>
-<li>Tank: EmberWarden, Goatox (Charge removed after aggro conflicts with other Charge-using mobs — replaced with real Taunt + PetClass.Tank passive healing).</li>
-<li>Melee: Bloodfang, plus 8 elemental generalist pairs (Frostmaw/Icefang, Venomcoil/Toxifang, Grimwyrm/Direfang, Sunwyrm/Sunfang) — left unclassified (PetClass.None) for now.</li>
-<li>Ranged/Caster: TempestDrake, Mysticwyrm, Sagefang — Int-scaled, low-HP tradeoff, fully non-mana-dependent by design.</li>
-<li>Repeated <code>CanFly = true</code>-in-constructor mistake (get-only override) caught and fixed multiple times across the roster before shipping.</li>
-<li>Venomcoil/Toxifang (deliberately the highest-damage elemental pair) rebalanced via <strong>-35% HP</strong> instead of a damage nerf, keeping their damage identity intact.</li>
-</ul>
-<p><strong>Leveling / stat system</strong></p>
-<ul>
-<li>Isolated into a new <code>TamingCreature : AbilityCreature</code> subclass rather than polluting shared <code>AbilityCreature.cs</code> (same mistake class as the earlier ability-cooldown-defaults issue, caught one level up the hierarchy).</li>
-<li>20 unspent points per level (loosened from 1) + XP/level-up system messages.</li>
-<li>Respec: <code>PetRespecStone.cs</code>, consumable, unlimited uses, refunds Str/Dex/Int, <code>LootType.Blessed</code>. Shard-wide drop hook added to <code>BaseCreature.GenerateLoot()</code>, scaled by Fame (~0.35% weak → 5% cap around dragon-tier).</li>
-<li><strong>Bug fixed:</strong> Stam/Mana collapsed to 1 on the first Dex/Int point spent — <code>SetStam</code>/<code>SetMana</code> were never called (unlike <code>SetHits</code>), leaving the seed at 0 and falling back to a getter that broke the instant the seed left 0. Fixed centrally in <code>TamingCreature.SpendPoint()</code> for the whole roster (present and future pets).</li>
-<li>Int-scaling wiring bug: pets used <code>AddCustomAbility</code> instead of the Int-scaling <code>AddScalableAbility</code> hook, making Int investment dead code — fixed roster-wide. EmberWarden's high base Int (backwards from "Int rewards Ranged" intent) still flagged, unresolved.</li>
-<li>New <code>PetClass</code> enum (None/Tank/Ranged/Melee), version-gated serialization. Only Tank has real mechanics so far: healing bonus via <code>Mobile.Heal()</code>'s <code>OnHeal</code> hook, raised from +20% → <strong>+60% total</strong> on request. <code>AnimalLoreGump.cs</code> shows a Class row when set.</li>
-</ul>
-<p><strong>Movement / AI — extensive iteration</strong></p>
-<ul>
-<li>Fixed pet speed, follow-run-threshold, and Recall teleport for unbonded pets (Dex-based speed scaling shard-wide, a fragile range-scan in <code>TeleportPets</code>, and an <code>onlyBonded=true</code> flag blocking unbonded pets).</li>
-<li><strong>Kiting root cause:</strong> <code>MageAI.RunTo()</code> only retreats when <code>SmartAI</code> (gated by <code>MagicalAbility.MageryMastery</code>, distinct from plain <code>Magery</code>) is true — none of the ranged pets had it set. Added <code>MageryMastery</code> to all three.</li>
-<li>Found <code>RangeFight</code> hardcoded to 1 (melee range) on all ranged pets, so they always closed to melee first — raised to 8, then narrowed to 4 after overcorrection (pets fleeing to max range), then finally replaced with a custom <code>NoCastMageAI.RunTo()</code> override: approach to <code>RangeFight</code> and hold, <strong>never retreat</strong>, positioning fully tamer-command-driven. <code>RangeFight</code> raised back to 10 once retreat was structurally impossible.</li>
-<li>Closed two real teleport-spell leaks (<code>DoActionCombat</code>'s teleport branch — reachable due to <code>Core.SA</code>/<code>Core.TOL</code> being true on this shard, not blocked by low Magery as first assumed; and <code>OnFailedMove</code>'s unconditional 10% teleport-when-stuck roll) via <code>NoCastMageAI</code> forcing <code>CheckCanCastMagery()</code> false — also guarantees these pets never depend on mana at all.</li>
-<li><strong>LOS bug found:</strong> none of the 30 custom ability files checked line-of-sight (pure spatial radius), causing abilities to hit through walls and cause "unprovoked" aggro in adjacent rooms. Fixed by adding an LOS check to the shared <code>IsValidAbilityTarget</code> helper (covers 12+ files at once), plus 3 files with their own inline dual-branch filters (<code>FlameStrikeCone</code>, <code>FlameStrikeLine</code>, <code>ForkedFlameStrike</code>). Not yet audited: <code>Fear.cs</code>, <code>HealAllies.cs</code>, <code>ToxicSpores.cs</code>, <code>TempestItem</code>.</li>
-<li>Mage pet damage buffed twice on feedback: +18%, then a further +15% stacked on top (final: TempestDrake Zap 13-17/BarrageOfBolts 14-20/Thunderstorm 9-15; Mysticwyrm FlameStrikeTargeted 17-24/FlameStrikeLine 20-24/ForkedFlameStrike 22-28; Sagefang FlameStrikeTargeted 15-21/Firebolt 8-14).</li>
-<li>Sagefang still felt weak after both buffs but explicitly should never exceed Mysticwyrm — fixed by giving it a <strong>3rd ability</strong> (Zap, 10-15, 6s cd) instead of inflating existing numbers, since it was stuck at the drake-tier 2-ability convention while TempestDrake (also drake-tier) already had 3.</li>
-</ul>
-<p><strong>Friendly-fire bug (systemic, shared with Insidious Dungeon abilities)</strong></p>
-<ul>
-<li>12 AOE ability files shared a wild-caster-only targeting filter that didn't account for a tamed caster hitting its own owner/sibling pets. Added shared <code>IsValidAbilityTarget()</code> helper, patched 10 files; 2 confirmed pre-existing real bugs (ToxicRain/Thunderstorm hitting sibling pets). Root cause of the originally reported Sunwyrm/MeteorStrike self-damage bug remains unresolved — lives in the unaudited companion <code>MeteorItem</code> class.</li>
-</ul>
-<p><strong>New abilities &amp; commands</strong></p>
-<ul>
-<li><strong>Taunt.cs</strong> — new CustomAbility (8 range, 0.5 trigger, 15s cooldown, 6s hold): forces a target to attack the caster via a recurring 1s Timer that re-asserts <code>Combatant</code>/<code>FocusMob</code> (a single assignment doesn't hold since AI re-evaluates each tick). Not added to the shared 30-ability registry array since every pet instantiates directly. Wired into Goatox (its real replacement for the removed Charge) and EmberWarden (added as a genuine 3rd ability alongside Grapple, which was renamed from <code>taunt</code> to <code>pull</code> to avoid confusion).</li>
-<li><strong>PetPull</strong> ([PetPull], player-usable): 3-second overhead countdown, then calls the same <code>TeleportPets</code> method Recall.cs uses. Later refactored into a shared static <code>DoPetPull()</code> so both the command and a new right-click context-menu entry call the same code.</li>
-<li><strong>[dip</strong> (emergency escape) now also instantly pulls pets to the same destination (no countdown, unlike PetPull) by calling <code>TeleportPets</code> directly after the player's own teleport.</li>
-<li><strong>(tameable) tag</strong> added shard-wide (not just custom pets) — <code>BaseCreature.cs</code>'s <code>AddNameProperties</code>/<code>OnSingleClick</code>, gated on <code>!Controlled &amp;&amp; Tamable &amp;&amp; Alive</code>, following the exact existing (summoned)/(bonded)/(tame) pattern. Applies automatically to every tameable creature on the shard.</li>
-</ul>
-<p><strong>Admin tooling</strong></p>
-<ul>
-<li><code>PetAdminGump.cs</code> ([PetAdmin]): Str/Dex/Int/Level/XP/UnspentPoints direct-set + instant respec button, links to <code>SetSkillGump</code>. <code>PetLevel</code> setter now correctly grants points-per-level even when set directly via [props.</li>
-<li><code>CustomAdminLauncherGump.cs</code> ([MooseAdmin]): shortcut launcher; restructured to support a "Spawn Tools" header with indented sub-buttons (Insidious Spawner, Pets).</li>
-<li><code>PetSpawnGump.cs</code> ([PetSpawn]): lists all 14 pets, resolves type by name via <code>ScriptCompiler.FindTypeByName</code> (one-line addition for future pets), spawns and auto-assigns to a targeted owner, sets <code>ControlOrder=Follow</code> by default.</li>
-<li>Standing convention: every new custom gump gets a shortcut added to <code>CustomAdminLauncherGump.cs</code> as part of delivery.</li>
-</ul>
-<hr />
-<h2>World Building — Insidious Dungeon (Custom Undead/Demon Mob Roster)</h2>
-<p><strong>Roster overview — now 32 mobs (all on Massapequa's Custom Abilities 3.0 framework)</strong></p>
-<ul>
-<li>Undead wing (tiers 1–5): GraveWarden, HollowWraith, InsidiousLich, DeathElemental, SepulcherDragon (dungeon boss — renamed from a name colliding with ServUO's stock <code>SkeletalDragon</code>).</li>
-<li>Demon/gargoyle wing (tiers 6–8): BoundGargoyle, AbyssalDrake, Wyrmlord.</li>
-<li>Daemon wing (tiers 9–11): CinderBrute (renamed from PitFiend — stock collision), InfernalDaemon, Doomlord (renamed from Archdaemon after it turned out ServUO ships its own stock Archdaemon class that silently absorbed <code>[add archdaemon</code>, causing a long-running low-gold mystery eventually root-caused via grep).</li>
-<li>Gargoyle mini-pack (siblings to BoundGargoyle, same power band): GraniteGargoyle, StormwingGargoyle, DreadwingGargoyle, RuneboundGargoyle.</li>
-<li>17-mob medium-tier expansion (same difficulty band as GraveWarden/GraniteGargoyle/CinderBrute, +100g/~10% more HP), built on specific body IDs — all renamed after discovering the original flavor names were literal UO client body-graphic names (a second, distinct collision risk): Chitterfang, Gorgemaw, Stitchbrute, Rendclaw, Thornreaper, Marrowfiend, Grimjaw, Nightward, Umbralurker, Bloodmaul, Scorchguard, Rotswarm, Riftcaller, Nightthrone, Chasmborn, Gloomstalker, Veilrender.</li>
-<li>Body-type sprite swaps: HollowWraith → 748, InsidiousLich → 747 (moving off placeholder bodies toward extracted real UO sprite art).</li>
-</ul>
-<p><strong>Recurring naming-collision lesson</strong></p>
-<ul>
-<li>Standing practice: grep <code>Scripts/</code> for <code>class &lt;Name&gt;</code> before shipping any new mob — ServUO's stock bestiary (Pit Fiend, Daemon, Balron, Skeletal Dragon, Archdaemon) is the recurring collision risk, sometimes silent (no compile error, silently resolves to the stock class) rather than obvious.</li>
-</ul>
-<p><strong>Design philosophy settled</strong></p>
-<ul>
-<li>Base melee/spell damage is the real threat; custom abilities are low-damage visual spectacle, not primary damage.</li>
-<li>Avoid abilities that lock the player out of control (cataloged: IcePrison, Snare, Zap, ThrowBoulder).</li>
-<li>Positional/avoidable zone abilities (e.g. RagingTempest's persistent vortex) confirmed as a favorite, keeper pattern.</li>
-<li>Heavy poison effects reserved for flavor-specific use only, not a general difficulty lever.</li>
-<li>Rejected reverse-engineering <code>GetBaseDifficulty()</code> for stat design — build for "fun and fightable" first.</li>
-</ul>
-<p><strong>Loot system — long iterative history, now settled</strong></p>
-<ul>
-<li>Root-caused and fixed a shard-wide double-gold-drop bug (<code>GenerateLoot()</code> firing twice; unguarded <code>PackGold</code> paid out both times).</li>
-<li>Fixed a structural gap: none of the roster's original loot packs included any weapon/armor pool at all.</li>
-<li>Went through several generosity passes (tiering upgrades, then a same-tier-repeat approach for more item rolls) before adopting the stock <strong>Balron pattern</strong> as the final approach: layering two <em>different</em> pack tiers with no explicit <code>PackGold</code> at all —</li>
-<li>entry tier = Average×2 + Meager×1</li>
-<li>upper-mid tier = Rich×2 + Average×1</li>
-<li>top tier (Wyrmlord/SepulcherDragon/Doomlord) = FilthyRich×2 + Rich×1</li>
-<li>SepulcherDragon further boosted to <strong>FilthyRich×3 + Rich×2</strong> as the true dungeon boss, now visibly outclassing its tier-mates.</li>
-<li>UltraRich deliberately held in reserve for a future power-creep ceiling mob.</li>
-<li>Discussed (and paused, pending concrete before/after examples) a proposal to give Insidious Dungeon mobs better treatment from the shard-wide loot sanitizer via a virtual property, without breaking its unified block-list.</li>
-</ul>
-<p><strong>Shard config fixes discovered along the way</strong></p>
-<ul>
-<li>Global HP multiplier confirmed at 1.4x; <code>GetBaseDifficulty()</code> divisor already matched.</li>
-<li><code>ResistanceType</code> has no <code>Holy</code> member — fixed a mob (<code>RuneboundGargoyle</code>) that mistakenly used it, mapped to Energy instead.</li>
-<li>Notoriety: <code>AlwaysMurderer</code> added to the two true bosses (red-named), <code>AlwaysAttackable</code> to the rest (grey-from-spawn), since humanoid-bodied mobs otherwise spawn blue/innocent by default.</li>
-<li>Full 30-ability sweep for a virtual/override mismatch bug — 3 of 30 abilities were wrong and patched.</li>
-<li>Framework patch to <code>CustomAbilitiesList.cs</code>/<code>AbilityCreature.cs</code>/<code>SummonMinion.cs</code> made the ability pool reusable across mobs (previously capped near 1 use per ability class); save/load round-trip verified working after a server restart.</li>
-<li>Second compile error class found on the daemon wing: <code>CanFly</code>/<code>CanRummageCorpses</code>/<code>PoisonImmune</code> are get-only overridden properties (matching stock <code>Daemon.cs</code>), not settable — fixed across CinderBrute/InfernalDaemon/Archdaemon.</li>
-<li>Daemon wing hues corrected against a real numbered hue chart after two wrong initial picks (one invalid slot, one wrong tone): CinderBrute 342, InfernalDaemon 1258, Archdaemon/Doomlord 1157.</li>
-</ul>
-<p><strong>Testing status</strong></p>
-<ul>
-<li>InsidiousLich and GraveWarden: locked/perfect.</li>
-<li>DeathElemental: very good, damage possibly slightly high, more testing planned.</li>
-<li>HollowWraith: still a bit hot on damage — all early testing used a character with <strong>no Magic Resist</strong>, retest pending.</li>
-<li>BoundGargoyle/AbyssalDrake/Wyrmlord: tested, generally positive (Wyrmlord's HP raised 440-520 → 530-620 after feeling low for its loot).</li>
-<li>SepulcherDragon: tough for melee but became manageable once Aether was maxed — read as confirmation the shard's Aether systems work as intended for PVE.</li>
-<li>Daemon wing: tested lightly, damage a bit high, deferred retuning to higher-end character testing.</li>
-<li>Gargoyle mini-pack and 17-mob medium-tier batch: built, not yet tested.</li>
-<li>Planned test matrix: Magic Resist + Parry character, and a bard using Discord with no Magic Resist.</li>
-<li>Interested in custom high-end loot (armor sets, named weapons) down the line, deferred for now.</li>
-</ul>
+<button class="menu-toggle" id="menuToggle">Contents</button>
+<div class="backdrop" id="backdrop"></div>
+
+<div class="shell">
+
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-mark">UOAether</div>
+    <div class="sidebar-sub">Player Wiki</div>
+    <ul class="toc" id="toc">
+      <li><a href="#character-creation"><span class="toc-num">01</span>Character Creation</a></li>
+      <li><a href="#aether-system"><span class="toc-num">02</span>The Aether System</a></li>
+      <li><a href="#taming"><span class="toc-num">03</span>Companions &amp; Taming</a></li>
+      <li><a href="#bard-skills"><span class="toc-num">04</span>Bard Skills</a></li>
+      <li><a href="#item-shop"><span class="toc-num">05</span>The Item Shop</a></li>
+      <li><a href="#wall-safes"><span class="toc-num">06</span>Wall Safes</a></li>
+      <li><a href="#world"><span class="toc-num">07</span>World &amp; Dungeons</a></li>
+      <li><a href="#champion-spawns"><span class="toc-num">08</span>Champion Spawns</a></li>
+      <li><a href="#crafting"><span class="toc-num">09</span>Crafting Changes</a></li>
+      <li><a href="#travel"><span class="toc-num">10</span>Travel &amp; Movement</a></li>
+      <li><a href="#commands"><span class="toc-num">11</span>Command Reference</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="hero-eyebrow">A Custom Ultima Online Shard</div>
+      <h1>UOAether</h1>
+      <p>What's different from stock Ultima Online — the systems that exist on this shard, what they do, and how to reach them in-game.</p>
+      <div class="hero-rule"></div>
+    </div>
+
+    <div class="content-inner">
+
+      <section id="character-creation">
+        <div class="section-eyebrow">01</div>
+        <h2>Character Creation</h2>
+        <p>A few things work differently the moment you roll a new character.</p>
+        <ul>
+          <li><strong>Human only.</strong> Elf and Gargoyle are not available as starting races.</li>
+          <li><strong>Every new character starts with a full spellbook.</strong> Regardless of your starting template or skill picks, you begin with a Magery spellbook already containing every spell across all eight circles — no need to train Inscription or track down scrolls just to fill it in.</li>
+          <li><strong>Five skills are disabled shard-wide</strong> and cannot be trained by any means: Bushido, Ninjitsu, Spellweaving, Mysticism, and Throwing. They won't appear as usable starting skills, and normal skill gain won't raise them even if you try.</li>
+        </ul>
+      </section>
+
+      <section id="aether-system">
+        <div class="section-eyebrow">02</div>
+        <h2>The Aether System</h2>
+        <p>A custom progression system layered on top of normal character advancement — a second, parallel form of growth alongside your skills and stats.</p>
+
+        <div class="aether-grid">
+          <div class="aether-chip"><span class="aether-dot terra" style="background:var(--terra); color:var(--terra);"></span><span><span class="name terra">Terra</span><span class="lean">Offense</span></span></div>
+          <div class="aether-chip"><span class="aether-dot cadence" style="background:var(--cadence); color:var(--cadence);"></span><span><span class="name cadence">Cadence</span><span class="lean">Support</span></span></div>
+          <div class="aether-chip"><span class="aether-dot celestial" style="background:var(--celestial); color:var(--celestial);"></span><span><span class="name celestial">Celestial</span><span class="lean">Offense</span></span></div>
+          <div class="aether-chip"><span class="aether-dot eldritch" style="background:var(--eldritch); color:var(--eldritch);"></span><span><span class="name eldritch">Eldritch</span><span class="lean">Offense</span></span></div>
+          <div class="aether-chip"><span class="aether-dot sylvan" style="background:var(--sylvan); color:var(--sylvan);"></span><span><span class="name sylvan">Sylvan</span><span class="lean">Support</span></span></div>
+          <div class="aether-chip"><span class="aether-dot tempest" style="background:var(--tempest); color:var(--tempest);"></span><span><span class="name tempest">Tempest</span><span class="lean">Offense</span></span></div>
+        </div>
+
+        <h3>How it works</h3>
+        <ul>
+          <li>You attune to two aethers at once — a <strong>Primary</strong> and a <strong>Secondary</strong> — from the six types above. More are planned.</li>
+          <li>Each aether type levels independently from 0 to 15. Progress in a type is saved even when it's not currently equipped — level Terra to 10, switch to Tempest, and your Terra progress is exactly where you left it when you switch back.</li>
+          <li>You level an aether by killing creatures. Kills grant experience toward your current level and a chance to drop <strong>Aether Vials</strong>, a currency used to advance your aether directly.</li>
+          <li>As you level, you unlock passive bonuses (like weapon accuracy or damage resistance from your Primary), an elemental proc chance in combat, and ability unlocks at certain tiers.</li>
+          <li><strong>Respeccing is currently free</strong> — reassign your Primary or Secondary at any time without penalty.</li>
+        </ul>
+
+        <div class="callout">Terra, Celestial, Eldritch, and Tempest lean offensive with stronger combat procs. Cadence and Sylvan lean support — Cadence in particular interacts directly with bard skills. See <a href="#bard-skills">Bard Skills</a>.</div>
+
+        <h3>Accessing it</h3>
+        <p>Type <code>[aether</code> to open your Aether Attunement screen. It shows your banked level in every aether type — not just your current two — lets you reassign your Primary/Secondary slots, and breaks down your current bonuses. A minimum resolution of 1920×1080 is recommended for the panel to display properly.</p>
+      </section>
+
+      <section id="taming">
+        <div class="section-eyebrow">03</div>
+        <h2>Companions &amp; Taming</h2>
+        <p>Taming carries a significant custom layer on top of stock pet mechanics.</p>
+
+        <h3>Custom pet roster</h3>
+        <p>14 unique tameable creatures exist alongside the usual wild animals, split across three combat roles:</p>
+        <ul>
+          <li><strong>Tank</strong> — built to hold aggro and soak damage (e.g. EmberWarden, Goatox)</li>
+          <li><strong>Ranged</strong> — casters and archers that hold distance (e.g. TempestDrake, Mysticwyrm, Sagefang)</li>
+          <li><strong>Melee</strong> — straightforward damage dealers (e.g. Bloodfang)</li>
+        </ul>
+        <p>A number of elemental-themed pairs (fire, ice, poison, storm, and more) exist without a fixed role, and can fit whatever part your party needs.</p>
+
+        <h3>Pet leveling</h3>
+        <p>Custom pets gain their own levels — separate from their stock stats — as they fight beside you, earning points to spend into their Strength, Dexterity, and Intelligence. How high a pet can level is tied to <em>your</em> Animal Taming skill: higher skill raises the cap your pets can reach. If you want to change how a pet's points were spent, a respec option is available.</p>
+        <p>To check a pet's progress, use your Animal Lore skill on it — or use the Lore option available for stabled pets — to see its current level, experience, and role.</p>
+
+        <h3>Managing your pets</h3>
+        <ul>
+          <li>Speak <strong>"stable"</strong> to a Stable Master to open your claim list and pick a pet.</li>
+          <li>Speak <strong>"stable all"</strong> to stable every pet currently following you in one go.</li>
+          <li>Speaking <strong>"claim"</strong> alone also opens the claim picker.</li>
+          <li><code>[PetPull</code> teleports all your pets to your current location after a short countdown — also available from your own right-click menu as <strong>"Pull Pets."</strong></li>
+        </ul>
+      </section>
+
+      <section id="bard-skills">
+        <div class="section-eyebrow">04</div>
+        <h2>Bard Skills</h2>
+        <p>Peacemaking, Provocation, and Discordance work as normal, but the underlying difficulty and landing-chance math have been recalibrated — numbers you remember from stock UO or other shards won't line up exactly.</p>
+        <ul>
+          <li>Effective creature difficulty for bard purposes is scaled up from stock.</li>
+          <li>The random landing-chance window is wider than stock — a well-trained bard has more consistent success against tougher targets than you might expect.</li>
+          <li>If your <span class="cadence" style="font-weight:600;">Cadence</span> aether is your Secondary, successfully landing a peace, provoke, or discord grants a bonus effect on top of the normal result — improved odds, longer duration, and an extra payoff on a landed success.</li>
+        </ul>
+      </section>
+
+      <section id="item-shop">
+        <div class="section-eyebrow">05</div>
+        <h2>The Item Shop <span style="color:var(--text-faint); font-weight:400;">(Gold Sink Store)</span></h2>
+        <p>A gold-currency store for spending large sums on account-wide conveniences, cosmetics, and quality-of-life items — this replaces the old account-age veteran reward system entirely, folding it directly into the store instead.</p>
+        <ul>
+          <li>The full former veteran rewards catalog — dye tubs, statues, tools, mounts, and more — now purchasable with gold instead of gated by account age.</li>
+          <li>Custom shard items, including a <strong>Portable Repair Bench</strong>, an <strong>Ethereal Lasher</strong> mount, a <strong>Bag of Sending</strong>, a <strong>Clothing Bless Deed</strong>, a <strong>Special Dye Tub</strong>, and a <strong>Wall Safe Deed</strong>.</li>
+        </ul>
+        <div class="callout">Cloak and robe rewards are intentionally excluded from the store, since this shard doesn't allow clothing to carry combat-affecting stat bonuses.</div>
+        <p>The store opens the same way as on any official Ultima Online client — through your client's Help menu / in-game store option. Prices are set in gold rather than real currency.</p>
+      </section>
+
+      <section id="wall-safes">
+        <div class="section-eyebrow">06</div>
+        <h2>Wall Safes</h2>
+        <p>A <strong>Wall Safe</strong> is a placeable house item, purchasable from the item shop, that lets you access your bank box remotely by simply double-clicking it — no travel to an actual bank required to check your balance or move items in and out.</p>
+      </section>
+
+      <section id="world">
+        <div class="section-eyebrow">07</div>
+        <h2>World &amp; Dungeons</h2>
+        <p>Several custom regions and dungeons exist beyond the standard map, each with tiered difficulty — typically Medium → Hard → Elite → Legendary.</p>
+
+        <div class="region">
+          <h3>Insidious Dungeon</h3>
+          <p>A mid-sized dungeon with a full difficulty spread from Medium through Legendary.</p>
+        </div>
+        <div class="region">
+          <h3>Ignis</h3>
+          <p>A fire-themed dungeon, similarly spread across all four difficulty tiers.</p>
+        </div>
+        <div class="region">
+          <h3>Underworld</h3>
+          <p>Currently offers Medium and Hard content. Its harder Miniboss/Boss tiers and the paired Stygian Abyss dungeon are still in development.</p>
+        </div>
+        <div class="region">
+          <h3>Wilderness</h3>
+          <p>By far the largest area, split into five zones: Normal, Desert, Snow, Swamp, and Castle Dissent. Castle Dissent skips the lower tiers entirely, offering only Elite and Legendary content — a fallen knight order theme with human-bodied, armored enemies.</p>
+        </div>
+        <div class="region">
+          <h3>Radius</h3>
+          <p>A corrupted city overrun by Castle Dissent's knight order, where friendly town vendors have been replaced by hostile "Dissent" versions of every classic vendor trade. Set up as a future liberation event once the server has a second town worth freeing.</p>
+        </div>
+      </section>
+
+      <section id="champion-spawns">
+        <div class="section-eyebrow">08</div>
+        <h2>Champion Spawns</h2>
+        <p>Champion spawn altars work as normal, but the total kills needed to fully clear one from start to Champion has been substantially reduced from stock — spawns are noticeably faster and more accessible than you may be used to.</p>
+      </section>
+
+      <section id="crafting">
+        <div class="section-eyebrow">09</div>
+        <h2>Crafting Changes</h2>
+        <p>Several stock crafting options have been intentionally removed from the Carpentry and Blacksmithing menus — largely Elven and Gargoyle-race items (since only Humans exist on this shard), most Tokuno/Samurai Empire-era armor and weapon variants, and a number of exotic late-game artifact weapons and armor pieces.</p>
+        <div class="callout">If something you remember being craftable on another shard isn't available here, it was most likely removed deliberately rather than missing by mistake.</div>
+        <p><strong>Tailoring</strong> is restricted to classic, Second Age-era recipes only — newer expansion-gated clothing and armor patterns are not craftable.</p>
+      </section>
+
+      <section id="travel">
+        <div class="section-eyebrow">10</div>
+        <h2>Travel &amp; Movement</h2>
+        <ul>
+          <li><strong>Public moongates in Felucca</strong> lead to shard-specific destinations rather than the standard city list: Conim Bank, Conim Moongate, Cido Entrance, Insidious Dungeon Entrance, Ignis Entrance, Radius Bank, and Radius Moongate. Moongates on every other facet — Trammel, Ilshenar, Malas, Tokuno, TerMur — still lead to their normal stock destinations.</li>
+          <li><strong>The "stuck" menu always sends you to Felucca</strong>, to a fixed point near Conim, regardless of which facet or town you were in when you used it — it will not return you to your race's usual home city.</li>
+          <li><strong>Teleport ropes</strong>, a custom item type found in parts of the world, can be used even while you're a ghost, not just while alive.</li>
+        </ul>
+      </section>
+
+      <section id="commands">
+        <div class="section-eyebrow">11</div>
+        <h2>Command Reference</h2>
+        <p>Every player-usable command and speech trigger covered on this page, in one place.</p>
+        <div class="cmd-table-wrap">
+          <table>
+            <thead>
+              <tr><th>Command</th><th>What it does</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="cmd">[aether</td><td>Open your Aether Attunement screen</td></tr>
+              <tr><td class="cmd">[PetPull</td><td>Teleport all your pets to your location</td></tr>
+              <tr><td class="cmd">[dip</td><td>Emergency escape if stuck in geometry — also brings your pets along</td></tr>
+              <tr><td class="cmd">"stable" <span style="color:var(--text-faint);">(speech)</span></td><td>Open the pet-claim picker at a Stable Master</td></tr>
+              <tr><td class="cmd">"stable all" <span style="color:var(--text-faint);">(speech)</span></td><td>Stable every pet currently following you</td></tr>
+              <tr><td class="cmd">"claim" <span style="color:var(--text-faint);">(speech)</span></td><td>Same as "stable" — opens the claim picker</td></tr>
+              <tr><td class="cmd">Right-click self → Pull Pets</td><td>Same as <span class="cmd" style="white-space:normal;">[PetPull</span></td></tr>
+              <tr><td class="cmd">Animal Lore on a pet</td><td>View that pet's custom level, XP, and role</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer>UOAether — Player Wiki</footer>
+
+    </div>
+  </main>
 </div>
-<footer>
-  UOAether Custom Shard — Changelog generated from development notes
-</footer>
+
+<script>
+  // Mobile TOC toggle
+  const sidebar = document.getElementById('sidebar');
+  const toggle = document.getElementById('menuToggle');
+  const backdrop = document.getElementById('backdrop');
+
+  function closeMenu(){
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('show');
+  }
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    backdrop.classList.toggle('show');
+  });
+  backdrop.addEventListener('click', closeMenu);
+  document.querySelectorAll('#toc a').forEach(a => {
+    a.addEventListener('click', closeMenu);
+  });
+
+  // Scrollspy — highlight active TOC entry
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
+  const links = Array.from(document.querySelectorAll('#toc a'));
+
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = links.find(l => l.getAttribute('href') === '#' + id);
+      if(!link) return;
+      if(entry.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s => spy.observe(s));
+</script>
+
 </body>
 </html>
