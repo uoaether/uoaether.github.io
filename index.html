@@ -416,17 +416,18 @@
       <li><a href="#character-creation"><span class="toc-num">01</span>Character Creation</a></li>
       <li><a href="#polyspec"><span class="toc-num">02</span>PolySpec &amp; Loadouts</a></li>
       <li><a href="#aether-system"><span class="toc-num">03</span>The Aether System</a></li>
-      <li><a href="#taming"><span class="toc-num">04</span>Companions &amp; Taming</a></li>
-      <li><a href="#bard-skills"><span class="toc-num">05</span>Bard Skills</a></li>
-      <li><a href="#notable-loot"><span class="toc-num">06</span>Notable Loot</a></li>
-      <li><a href="#item-shop"><span class="toc-num">07</span>The Item Shop</a></li>
-      <li><a href="#wall-safes"><span class="toc-num">08</span>Wall Safes</a></li>
-      <li><a href="#world"><span class="toc-num">09</span>World &amp; Dungeons</a></li>
-      <li><a href="#champion-spawns"><span class="toc-num">10</span>Champion Spawns</a></li>
-      <li><a href="#quests"><span class="toc-num">11</span>Quests</a></li>
-      <li><a href="#crafting"><span class="toc-num">12</span>Crafting Changes</a></li>
-      <li><a href="#travel"><span class="toc-num">13</span>Travel &amp; Movement</a></li>
-      <li><a href="#commands"><span class="toc-num">14</span>Command Reference</a></li>
+      <li><a href="#perks"><span class="toc-num">04</span>Perks</a></li>
+      <li><a href="#taming"><span class="toc-num">05</span>Companions &amp; Taming</a></li>
+      <li><a href="#bard-skills"><span class="toc-num">06</span>Bard Skills</a></li>
+      <li><a href="#notable-loot"><span class="toc-num">07</span>Notable Loot</a></li>
+      <li><a href="#item-shop"><span class="toc-num">08</span>The Item Shop</a></li>
+      <li><a href="#wall-safes"><span class="toc-num">09</span>Wall Safes</a></li>
+      <li><a href="#world"><span class="toc-num">10</span>World &amp; Dungeons</a></li>
+      <li><a href="#champion-spawns"><span class="toc-num">11</span>Champion Spawns</a></li>
+      <li><a href="#quests"><span class="toc-num">12</span>Quests</a></li>
+      <li><a href="#crafting"><span class="toc-num">13</span>Crafting Changes</a></li>
+      <li><a href="#travel"><span class="toc-num">14</span>Travel &amp; Movement</a></li>
+      <li><a href="#commands"><span class="toc-num">15</span>Command Reference</a></li>
     </ul>
   </nav>
 
@@ -512,8 +513,47 @@
         <p>Type <code>[aether</code> to open your Aether Attunement screen. It shows your banked level in every aether type — not just your current two — lets you reassign your Primary/Secondary slots, and breaks down your current bonuses. A minimum resolution of 1920×1080 is recommended for the panel to display properly.</p>
       </section>
 
-      <section id="taming">
+      <section id="perks">
         <div class="section-eyebrow">04</div>
+        <h2>Perks</h2>
+        <p>A separate, permanent progression system layered on top of everything else — Perks is the long game. Where the Aether System is something you can meaningfully build up over weeks, Perks is designed to take a casual player years to fully max out, and a genuinely dedicated player the better part of a year. It's built to always have somewhere left to go.</p>
+
+        <h3>How it works</h3>
+        <ul>
+          <li>There are 14 Perk categories, each covering a small, permanent combat or utility bonus — see the table below.</li>
+          <li>Each category has 10 levels. Every kill grants experience toward whichever category you're currently <strong>Training</strong> — only one category earns experience at a time, and you choose which.</li>
+          <li>Once a category banks enough experience, its next level becomes eligible — but you still have to spend <strong>10 Aether Shards</strong> to actually unlock it. Experience is never lost or wasted while it waits to be claimed.</li>
+          <li>Unlocked levels don't have to be active. You can hold up to <strong>10 total active levels</strong> across all 14 categories combined, in whatever split you like — five in one category and five in another, or ten stacked into a single one.</li>
+          <li>Switching your Training target, or which levels are active, is completely free — no cost, no cooldown, and nothing is ever lost by switching. The only restriction is that changes can only be made while standing in a safe area (your own house, or inside a guarded town).</li>
+        </ul>
+
+        <div class="callout">Every level you've ever unlocked in a category stays unlocked forever, even if you deactivate it later. There's no wrong category to grind — banking experience and unlocking levels is never wasted effort, only <em>which ten</em> are switched on at any given moment is a choice you make.</div>
+
+        <h3>Categories</h3>
+        <div class="cmd-table-wrap">
+          <table>
+            <thead>
+              <tr><th>Category</th><th>Category</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Spell Damage</td><td>Weapon Accuracy</td></tr>
+              <tr><td>Melee Damage</td><td>Swing Speed</td></tr>
+              <tr><td>Barding Success Chance</td><td>Pet Damage</td></tr>
+              <tr><td>Aether Proc Chance</td><td>Pet Healing</td></tr>
+              <tr><td>Aether Proc Damage</td><td>Pet Damage Resistance</td></tr>
+              <tr><td>Mana Regen</td><td>Player Damage Resistance</td></tr>
+              <tr><td>Health/Stamina Regen</td><td>Healing</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Two categories are worth calling out specifically: <strong>Healing</strong> covers your own Magery heal spells and Bandages only. <strong>Pet Healing</strong> is separate, and covers both Magery heals cast on a pet and Veterinary.</p>
+
+        <h3>Accessing it</h3>
+        <p>Type <code>[perks</code> to open your Perks panel. It shows every category's progress, lets you set your Training target, spend Aether Shards to unlock eligible levels, and choose which unlocked levels are currently active.</p>
+      </section>
+
+      <section id="taming">
+        <div class="section-eyebrow">05</div>
         <h2>Companions &amp; Taming</h2>
         <p>Taming carries a significant custom layer on top of stock pet mechanics.</p>
 
@@ -540,7 +580,7 @@
       </section>
 
       <section id="bard-skills">
-        <div class="section-eyebrow">05</div>
+        <div class="section-eyebrow">06</div>
         <h2>Bard Skills</h2>
         <p>Peacemaking, Provocation, and Discordance work as normal, but the underlying difficulty and landing-chance math have been recalibrated — numbers you remember from stock UO or other shards won't line up exactly.</p>
         <ul>
@@ -551,7 +591,7 @@
       </section>
 
       <section id="notable-loot">
-        <div class="section-eyebrow">06</div>
+        <div class="section-eyebrow">07</div>
         <h2>Notable Loot</h2>
         <p>A couple of drop types worth knowing about, since they don't work quite like stock Ultima Online.</p>
 
@@ -563,7 +603,7 @@
       </section>
 
       <section id="item-shop">
-        <div class="section-eyebrow">07</div>
+        <div class="section-eyebrow">08</div>
         <h2>The Item Shop <span style="color:var(--text-faint); font-weight:400;">(Gold Sink Store)</span></h2>
         <p>A gold-currency store for spending large sums on account-wide conveniences, cosmetics, and quality-of-life items — this replaces the old account-age veteran reward system entirely, folding it directly into the store instead.</p>
         <ul>
@@ -575,13 +615,13 @@
       </section>
 
       <section id="wall-safes">
-        <div class="section-eyebrow">08</div>
+        <div class="section-eyebrow">09</div>
         <h2>Wall Safes</h2>
         <p>A <strong>Wall Safe</strong> is a placeable house item, purchasable from the item shop, that lets you access your bank box remotely by simply double-clicking it — no travel to an actual bank required to check your balance or move items in and out.</p>
       </section>
 
       <section id="world">
-        <div class="section-eyebrow">09</div>
+        <div class="section-eyebrow">10</div>
         <h2>World &amp; Dungeons</h2>
         <p>Several custom regions and dungeons exist beyond the standard map, each with tiered difficulty — typically Medium → Hard → Elite → Legendary.</p>
 
@@ -608,13 +648,13 @@
       </section>
 
       <section id="champion-spawns">
-        <div class="section-eyebrow">10</div>
+        <div class="section-eyebrow">11</div>
         <h2>Champion Spawns</h2>
         <p>Champion spawn altars work as normal, but the total kills needed to fully clear one from start to Champion has been substantially reduced from stock — spawns are noticeably faster and more accessible than you may be used to.</p>
       </section>
 
       <section id="quests">
-        <div class="section-eyebrow">11</div>
+        <div class="section-eyebrow">12</div>
         <h2>Quests</h2>
         <p>A growing set of area-based kill quests are available from quest-giver NPCs scattered around the world. Accept one by speaking with the NPC, then head into the specified area and start clearing it out — kills within the quest's territory count automatically, no special targeting required.</p>
         <p>Type <code>[quest</code> at any time to open your personal quest log — a combined list of everything you've currently accepted, with live progress, where to turn in, and an option to abandon a quest if you'd rather drop it.</p>
@@ -622,7 +662,7 @@
       </section>
 
       <section id="crafting">
-        <div class="section-eyebrow">12</div>
+        <div class="section-eyebrow">13</div>
         <h2>Crafting Changes</h2>
         <p>Several stock crafting options have been intentionally removed across almost every trade — largely Elven and Gargoyle-race items (since only Humans exist on this shard), most Tokuno/Samurai Empire-era armor and weapon variants, and a number of exotic late-game artifact weapons, armor pieces, and potions.</p>
         <div class="callout">If something you remember being craftable on another shard isn't available here, it was most likely removed deliberately rather than missing by mistake.</div>
@@ -638,7 +678,7 @@
       </section>
 
       <section id="travel">
-        <div class="section-eyebrow">13</div>
+        <div class="section-eyebrow">14</div>
         <h2>Travel &amp; Movement</h2>
         <ul>
           <li><strong>Public moongates in Felucca(BROKEN CURRENTLY SORRY)</strong> lead to shard-specific destinations rather than the standard city list: Conim Bank, Conim Moongate, Cido Entrance, Insidious Dungeon Entrance, Ignis Entrance, Radius Bank, and Radius Moongate. Moongates on every other facet — Trammel, Ilshenar, Malas, Tokuno, TerMur — still lead to their normal stock destinations.</li>
@@ -651,7 +691,7 @@
       </section>
 
       <section id="commands">
-        <div class="section-eyebrow">14</div>
+        <div class="section-eyebrow">15</div>
         <h2>Command Reference</h2>
         <p>Every player-usable command and speech trigger covered on this page, in one place.</p>
         <div class="cmd-table-wrap">
@@ -661,6 +701,7 @@
             </thead>
             <tbody>
               <tr><td class="cmd">[aether</td><td>Open your Aether Attunement screen</td></tr>
+              <tr><td class="cmd">[perks</td><td>Open your Perks panel — set your Training target, unlock levels, and choose which are active</td></tr>
               <tr><td class="cmd">[polyspec</td><td>Open your PolySpec manager — save, load, rename, and reorder your skill/stat loadouts</td></tr>
               <tr><td class="cmd">[quest</td><td>Open your personal quest log — progress, turn-in status, and abandon</td></tr>
               <tr><td class="cmd">[PetPull</td><td>Teleport all your pets to your location</td></tr>
