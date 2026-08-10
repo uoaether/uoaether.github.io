@@ -27,6 +27,10 @@
     --prodigy:  #a06fe0;
     --sylvan:    #6fbf7d;
     --tempest:   #46d1c9;
+    --blaze:       #d9563a;
+    --marksman:    #8a95a5;
+    --prowl:       #6b3550;
+    --professional: #cc9944;
 
     --radius: 10px;
     --content-w: 720px;
@@ -154,8 +158,10 @@
     line-height: 1.05;
     background: linear-gradient(100deg,
       var(--terra), var(--cadence), var(--celestial),
-      var(--prodigy), var(--sylvan), var(--tempest), var(--terra));
-    background-size: 300% 100%;
+      var(--prodigy), var(--sylvan), var(--tempest),
+      var(--blaze), var(--marksman), var(--prowl), var(--professional),
+      var(--terra));
+    background-size: 500% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -273,6 +279,10 @@
   .prodigy { color: var(--prodigy); }
   .sylvan   { color: var(--sylvan); }
   .tempest  { color: var(--tempest); }
+  .blaze        { color: var(--blaze); }
+  .marksman     { color: var(--marksman); }
+  .prowl        { color: var(--prowl); }
+  .professional { color: var(--professional); }
 
   /* ---------- Callout ---------- */
   .callout{
@@ -458,18 +468,22 @@
           <div class="aether-chip"><span class="aether-dot prodigy" style="background:var(--prodigy); color:var(--prodigy);"></span><span><span class="name prodigy">Prodigy</span><span class="lean">Mage</span></span></div>
           <div class="aether-chip"><span class="aether-dot sylvan" style="background:var(--sylvan); color:var(--sylvan);"></span><span><span class="name sylvan">Sylvan</span><span class="lean">Tamer</span></span></div>
           <div class="aether-chip"><span class="aether-dot tempest" style="background:var(--tempest); color:var(--tempest);"></span><span><span class="name tempest">Tempest</span><span class="lean">Utility</span></span></div>
+          <div class="aether-chip"><span class="aether-dot blaze" style="background:var(--blaze); color:var(--blaze);"></span><span><span class="name blaze">Blaze</span><span class="lean">Pyromancer</span></span></div>
+          <div class="aether-chip"><span class="aether-dot marksman" style="background:var(--marksman); color:var(--marksman);"></span><span><span class="name marksman">Marksman</span><span class="lean">Archer</span></span></div>
+          <div class="aether-chip"><span class="aether-dot prowl" style="background:var(--prowl); color:var(--prowl);"></span><span><span class="name prowl">Prowl</span><span class="lean">Assassin</span></span></div>
+          <div class="aether-chip"><span class="aether-dot professional" style="background:var(--professional); color:var(--professional);"></span><span><span class="name professional">Professional</span><span class="lean">Crafter</span></span></div>
         </div>
 
         <h3>How it works</h3>
         <ul>
-          <li>You attune to two aethers at once — a <strong>Primary</strong> and a <strong>Secondary</strong> — from the six types above. More are planned.</li>
+          <li>You attune to two aethers at once — a <strong>Primary</strong> and a <strong>Secondary</strong> — from the types above. More are planned.</li>
           <li>Each aether type levels independently from 0 to 15. Progress in a type is saved even when it's not currently equipped — level Terra to 10, switch to Tempest, and your Terra progress is exactly where you left it when you switch back.</li>
-          <li>You level an aether by killing creatures. Kills grant experience toward your current level and a chance to drop <strong>Aether Vials</strong>, a currency used to advance your aether directly.</li>
+          <li>You level an aether by killing creatures. Kills grant experience toward your current level and a chance to drop an <strong>Aether Vial</strong> matching one of the aether types — used to advance that specific aether directly. Rarely, a <strong>Prismatic Aether Vial</strong> drops instead, which can be exchanged for any type of your choosing.</li>
           <li>As you level, you unlock passive bonuses (like weapon accuracy or damage resistance from your Primary), an elemental proc chance in combat, and ability unlocks at certain tiers.</li>
           <li><strong>Respeccing is currently free</strong> — reassign your Primary or Secondary at any time without penalty.</li>
         </ul>
 
-        <div class="callout">Terra, Prodigy, and Tempest lean offensive with stronger combat procs. Celestial is a healing specialization, so it sits apart from that offensive lean despite its stronger proc. Cadence and Sylvan lean support — Cadence in particular interacts directly with bard skills. See <a href="#bard-skills">Bard Skills</a>.</div>
+        <div class="callout">Terra, Prodigy, Tempest, Blaze, Marksman, and Prowl all lean offensive with stronger combat procs. Celestial is a healing specialization, so it sits apart from that offensive lean despite its stronger proc. Cadence and Sylvan lean support — Cadence in particular interacts directly with bard skills. Professional is different again: it's built for crafting, not combat, boosting exceptional-item chance and giving a chance to not consume materials on a successful craft. See <a href="#bard-skills">Bard Skills</a>.</div>
 
         <h3>Accessing it</h3>
         <p>Type <code>[aether</code> to open your Aether Attunement screen. It shows your banked level in every aether type — not just your current two — lets you reassign your Primary/Secondary slots, and breaks down your current bonuses. A minimum resolution of 1920×1080 is recommended for the panel to display properly.</p>
@@ -516,11 +530,12 @@
       <section id="skillstones">
         <div class="section-eyebrow">05</div>
         <h2>Skillstones</h2>
-        <p>A player-facing alternative to the slow grind of natural skill gain — a placeable item that lets you set your own skill values directly, styled after the same picker admins use.</p>
+        <p>A player-facing alternative to the slow grind of natural skill and stat gain — a placeable item that lets you set your own skill values and stats directly, styled after the same picker admins use.</p>
         <ul>
-          <li>Double-click a <strong>Skillstone</strong> (guildstone graphic) to open your own skill picker. It only ever affects <em>your</em> skills — there's no way to target anyone else with it.</li>
-          <li>The panel shows your current total against the shard's total skill cap, plus how many points you have left to spend, so you always know what's available before committing.</li>
-          <li>Each individual skill is still capped at its own normal ceiling — a skill that hasn't had its cap raised via Power Scroll stays capped at 100 through the stone, exactly like natural training. The stone lets you redistribute freely, not exceed your real limits.</li>
+          <li>Double-click a <strong>Skillstone</strong> (guildstone graphic) to open your own picker. It only ever affects <em>your</em> skills and stats — there's no way to target anyone else with it.</li>
+          <li>Strength, Dexterity, and Intelligence sit at the top of the panel and stay visible no matter which skill page you're browsing, so you don't have to flip back just to adjust a stat.</li>
+          <li>The panel shows your current totals against the shard's caps — separately for skills and for stats — plus how many points you have left to spend in each, so you always know what's available before committing.</li>
+          <li>Each individual skill or stat is still capped at its own normal ceiling — a skill that hasn't had its cap raised via Power Scroll stays capped at 100 through the stone, exactly like natural training. The stone lets you redistribute freely, not exceed your real limits.</li>
           <li>The five shard-disabled skills (Bushido, Ninjitsu, Spellweaving, Mysticism, Throwing) don't appear in the picker at all.</li>
           <li>If you request more points than you have available, the stone fills in as much as it can and tells you what was actually applied rather than rejecting the change outright.</li>
           <li>The stone isn't consumed by use — it's a reusable, permanent fixture, not a one-time scroll.</li>
