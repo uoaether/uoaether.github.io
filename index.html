@@ -419,18 +419,21 @@
       <li><a href="#perks"><span class="toc-num">04</span>Perks</a></li>
       <li><a href="#bonus-tracker"><span class="toc-num">05</span>Bonus Tracker</a></li>
       <li><a href="#combat-mechanics"><span class="toc-num">06</span>Combat Mechanics</a></li>
-      <li><a href="#taming"><span class="toc-num">07</span>Companions &amp; Taming</a></li>
-      <li><a href="#bard-skills"><span class="toc-num">08</span>Bard Skills</a></li>
-      <li><a href="#notable-loot"><span class="toc-num">09</span>Notable Loot</a></li>
-      <li><a href="#item-shop"><span class="toc-num">10</span>The Item Shop</a></li>
-      <li><a href="#wall-safes"><span class="toc-num">11</span>Wall Safes</a></li>
-      <li><a href="#world"><span class="toc-num">12</span>World &amp; Dungeons</a></li>
-      <li><a href="#champion-spawns"><span class="toc-num">13</span>Champion Spawns</a></li>
-      <li><a href="#quests"><span class="toc-num">14</span>Quests</a></li>
-      <li><a href="#fusion-crafting"><span class="toc-num">15</span>Fusion Crafting</a></li>
-      <li><a href="#crafting"><span class="toc-num">16</span>Crafting Changes</a></li>
-      <li><a href="#travel"><span class="toc-num">17</span>Travel &amp; Movement</a></li>
-      <li><a href="#commands"><span class="toc-num">18</span>Command Reference</a></li>
+      <li><a href="#threat-system"><span class="toc-num">07</span>Tank, DPS &amp; Threat</a></li>
+      <li><a href="#taming"><span class="toc-num">08</span>Companions &amp; Taming</a></li>
+      <li><a href="#summoner-builds"><span class="toc-num">09</span>Summoner Builds</a></li>
+      <li><a href="#bard-skills"><span class="toc-num">10</span>Bard Skills</a></li>
+      <li><a href="#notable-loot"><span class="toc-num">11</span>Notable Loot</a></li>
+      <li><a href="#item-shop"><span class="toc-num">12</span>The Item Shop</a></li>
+      <li><a href="#transmog"><span class="toc-num">13</span>Transmog</a></li>
+      <li><a href="#wall-safes"><span class="toc-num">14</span>Wall Safes</a></li>
+      <li><a href="#world"><span class="toc-num">15</span>World &amp; Dungeons</a></li>
+      <li><a href="#champion-spawns"><span class="toc-num">16</span>Champion Spawns</a></li>
+      <li><a href="#quests"><span class="toc-num">17</span>Quests</a></li>
+      <li><a href="#fusion-crafting"><span class="toc-num">18</span>Fusion Crafting</a></li>
+      <li><a href="#crafting"><span class="toc-num">19</span>Crafting Changes</a></li>
+      <li><a href="#travel"><span class="toc-num">20</span>Travel &amp; Movement</a></li>
+      <li><a href="#commands"><span class="toc-num">21</span>Command Reference</a></li>
     </ul>
   </nav>
 
@@ -586,8 +589,21 @@
         <div class="callout">For a clean instahit, step fully out of combat and wait it out unarmed. Throwing bare-handed swings at a target while you wait can overwrite the timer with your unarmed speed instead.</div>
       </section>
 
-      <section id="taming">
+      <section id="threat-system">
         <div class="section-eyebrow">07</div>
+        <h2>Tank, DPS &amp; Threat</h2>
+        <p>A real threat system now drives monster targeting shard-wide, replacing the old "whoever's closest or hit me last" logic. Pets and summons can be assigned a combat role — <strong>Tank</strong>, <strong>Ranged</strong>, or <strong>Melee</strong> — right from the Animal Lore panel.</p>
+        <ul>
+          <li>A pet or summon set to <strong>Tank</strong> generates dramatically more threat and will hold aggro on its own, even without Taunt.</li>
+          <li><strong>Ranged</strong> and <strong>Melee</strong> generate far less threat, letting them fight alongside a tank without accidentally stealing the monster's attention.</li>
+          <li>Taunt (on the pets that have it) now forces a guaranteed threat spike plus a short lock window where the target can't be peeled away no matter what happens next — a real panic button, not just a coin flip.</li>
+          <li>Set a role any time from your pet or summon's Animal Lore panel — it takes effect immediately and is remembered for next time.</li>
+        </ul>
+        <div class="callout">Healing threat isn't factored in yet — right now only damage builds threat, so an eager healer can still pull aggro off the tank. A more complete version of the system is planned.</div>
+      </section>
+
+      <section id="taming">
+        <div class="section-eyebrow">08</div>
         <h2>Companions &amp; Taming</h2>
         <p>Taming carries a significant custom layer on top of stock pet mechanics.</p>
 
@@ -613,8 +629,22 @@
         </ul>
       </section>
 
+      <section id="summoner-builds">
+        <div class="section-eyebrow">09</div>
+        <h2>Summoner Builds</h2>
+        <p>Magery's summon spells got real attention: <strong>Fire Elemental</strong> and <strong>Earth Elemental</strong> have been reworked into stronger, more reliable companions — several bugs that left summons spawning anywhere from 71% to nearly 200% of their intended health are fixed. The other four Magery summon types haven't been touched yet.</p>
+        <ul>
+          <li><strong>Spirit Speak</strong> is the summoner's real investment skill now: every full 10 points adds 1% summon power (capped at 12% at 120 skill) and 2 minutes of duration. 100 Spirit Speak = +10% power and 20 minutes.</li>
+          <li>Monsters can no longer dispel your summons, whether by melee contact or spellcasting — dispel can now only come from another player's Dispel or Mass Dispel spell.</li>
+          <li>Casting a 7th or 8th Circle Magery spell at GM skill (100) now always succeeds — a quality-of-life change for every high-end caster, not just summoners.</li>
+          <li>Mounts cost 0 follower slots on this shard, so riding one never competes with your summons for space.</li>
+          <li>Fire Elemental and Earth Elemental can be set to a Tank, Ranged, or Melee role too — see <a href="#threat-system">Tank, DPS &amp; Threat</a>.</li>
+        </ul>
+        <div class="callout">The trade-off: dismiss your summons and you get +15% spell damage as a pure caster instead. Switch back any time — it costs nothing either way.</div>
+      </section>
+
       <section id="bard-skills">
-        <div class="section-eyebrow">08</div>
+        <div class="section-eyebrow">10</div>
         <h2>Bard Skills</h2>
         <p>Peacemaking, Provocation, and Discordance work as normal, but the underlying difficulty and landing-chance math have been recalibrated — numbers you remember from stock UO or other shards won't line up exactly.</p>
         <ul>
@@ -625,7 +655,7 @@
       </section>
 
       <section id="notable-loot">
-        <div class="section-eyebrow">09</div>
+        <div class="section-eyebrow">11</div>
         <h2>Notable Loot</h2>
         <p>A couple of drop types worth knowing about, since they don't work quite like stock Ultima Online.</p>
 
@@ -637,7 +667,7 @@
       </section>
 
       <section id="item-shop">
-        <div class="section-eyebrow">10</div>
+        <div class="section-eyebrow">12</div>
         <h2>The Item Shop <span style="color:var(--text-faint); font-weight:400;">(Gold Sink Store)</span></h2>
         <p>A gold-currency store for spending large sums on account-wide conveniences, cosmetics, and quality-of-life items — replacing the old account-age veteran reward system, folded directly into the store.</p>
         <ul>
@@ -648,14 +678,28 @@
         <p>The store opens the same way as on any official Ultima Online client — through your client's Help menu / in-game store option. Prices are set in gold rather than real currency.</p>
       </section>
 
+      <section id="transmog">
+        <div class="section-eyebrow">13</div>
+        <h2>Transmog</h2>
+        <p>Make any equippable item borrow the <em>look</em> of another item you own, while keeping its own stats, name, resistances, and properties completely untouched. Free, and doesn't consume the item you're copying the look from.</p>
+        <ul>
+          <li>Type <code>[xmog</code> to open the appearance picker.</li>
+          <li>The borrowed look only shows while the item is worn — in your pack or on a corpse, it shows its real appearance.</li>
+          <li>The item you're copying the look <em>from</em> must be blessed. You can choose to also borrow its hue, or keep your own.</li>
+          <li>Works across compatible slots: the same layer, or matching groups (any torso-layer piece onto any other torso-layer piece, same for legs). Shields can borrow other shields' looks; weapons can't be used this way, since weapon art drives your swing animation.</li>
+          <li>A few special appearance-only pieces exist that hide a slot entirely — the item stays equipped and keeps its stats, it just renders nothing.</li>
+        </ul>
+        <div class="callout">Still in testing — not available on the live server yet.</div>
+      </section>
+
       <section id="wall-safes">
-        <div class="section-eyebrow">11</div>
+        <div class="section-eyebrow">14</div>
         <h2>Wall Safes</h2>
         <p>A <strong>Wall Safe</strong> is a placeable house item, purchasable from the item shop, that lets you access your bank box remotely by simply double-clicking it — no travel to an actual bank required to check your balance or move items in and out.</p>
       </section>
 
       <section id="world">
-        <div class="section-eyebrow">12</div>
+        <div class="section-eyebrow">15</div>
         <h2>World &amp; Dungeons</h2>
         <p>Several custom regions and dungeons exist beyond the standard map, each with tiered difficulty — typically Medium → Hard → Elite → Legendary.</p>
 
@@ -684,13 +728,13 @@
       </section>
 
       <section id="champion-spawns">
-        <div class="section-eyebrow">13</div>
+        <div class="section-eyebrow">16</div>
         <h2>Champion Spawns</h2>
         <p>Champion spawn altars work as normal, but the total kills needed to fully clear one from start to Champion has been substantially reduced from stock — spawns are noticeably faster and more accessible than you may be used to.</p>
       </section>
 
       <section id="quests">
-        <div class="section-eyebrow">14</div>
+        <div class="section-eyebrow">17</div>
         <h2>Quests</h2>
         <p>A growing set of area-based kill quests are available from quest-giver NPCs scattered around the world. Accept one by speaking with the NPC, then head into the specified area and start clearing it out — kills within the quest's territory count automatically, no special targeting required.</p>
         <p>Type <code>[quest</code> at any time to open your personal quest log — a combined list of everything you've currently accepted, with live progress, where to turn in, and an option to abandon a quest if you'd rather drop it.</p>
@@ -698,7 +742,7 @@
       </section>
 
       <section id="fusion-crafting">
-        <div class="section-eyebrow">15</div>
+        <div class="section-eyebrow">18</div>
         <h2>Fusion Crafting</h2>
         <p><strong>Blacksmithy, Carpentry, and Fletching</strong> all use a custom crafting menu in place of the stock one — build weapons and armor with hand-picked properties instead of random rolls. Tinkering and every other trade are untouched and still work as normal.</p>
 
@@ -717,7 +761,7 @@
       </section>
 
       <section id="crafting">
-        <div class="section-eyebrow">16</div>
+        <div class="section-eyebrow">19</div>
         <h2>Crafting Changes</h2>
         <p>Several stock crafting options have been intentionally removed across almost every trade — largely Elven and Gargoyle-race items (since only Humans exist on this shard), most Tokuno/Samurai Empire-era armor and weapon variants, and a number of exotic late-game artifact weapons, armor pieces, and potions.</p>
         <div class="callout">If something you remember being craftable on another shard isn't available here, it was most likely removed deliberately rather than missing by mistake.</div>
@@ -733,7 +777,7 @@
       </section>
 
       <section id="travel">
-        <div class="section-eyebrow">17</div>
+        <div class="section-eyebrow">20</div>
         <h2>Travel &amp; Movement</h2>
         <ul>
           <li><strong>Public moongates in Felucca(BROKEN CURRENTLY SORRY)</strong> lead to shard-specific destinations rather than the standard city list: Conim Bank, Conim Moongate, Cido Entrance, Insidious Dungeon Entrance, Ignis Entrance, Radius Bank, and Radius Moongate. Moongates on every other facet — Trammel, Ilshenar, Malas, Tokuno, TerMur — still lead to their normal stock destinations.</li>
@@ -746,7 +790,7 @@
       </section>
 
       <section id="commands">
-        <div class="section-eyebrow">18</div>
+        <div class="section-eyebrow">21</div>
         <h2>Command Reference</h2>
         <p>Every player-usable command and speech trigger covered on this page, in one place.</p>
         <div class="cmd-table-wrap">
@@ -758,6 +802,7 @@
               <tr><td class="cmd">[aether</td><td>Open your Aether Attunement screen</td></tr>
               <tr><td class="cmd">[perks</td><td>Open your Perks panel — set your Training target, unlock levels, and choose which are active</td></tr>
               <tr><td class="cmd">[bonuses <span style="color:var(--text-faint);">(or [mystats)</span></td><td>Open your live Bonus Tracker panel</td></tr>
+              <tr><td class="cmd">[xmog</td><td>Open the Transmog appearance picker (still in testing)</td></tr>
               <tr><td class="cmd">[polyspec</td><td>Open your PolySpec manager — save, load, rename, and reorder your skill/stat loadouts</td></tr>
               <tr><td class="cmd">[quest</td><td>Open your personal quest log — progress, turn-in status, and abandon</td></tr>
               <tr><td class="cmd">[PetPull</td><td>Teleport all your pets to your location</td></tr>
