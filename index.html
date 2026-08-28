@@ -581,14 +581,14 @@
         <p>A few underlying combat mechanics work differently here than you might expect from stock Ultima Online.</p>
 
         <h3>Archery &amp; Weapon Timing</h3>
-        <p>All Bows and Crossbows swing 40% faster than other weapon types, an innate bonus that stacks with every other swing-speed bonus you have. Separately, the classic "instahit" mechanic is back: unequipping a weapon doesn't reset its swing timer, so a timer already counting down keeps ticking no matter what's in your hands. Re-equip once it's expired and your very next swing lands instantly.</p>
+        <p>Swing Speed has been reworked and capped at 100%. Separately, the classic "instahit" mechanic is back: unequipping a weapon doesn't reset its swing timer, so a timer already counting down keeps ticking no matter what's in your hands. Re-equip once it's expired and your very next swing lands instantly.</p>
 
         <h3>Weapon &amp; Armor Decay</h3>
-        <p>Weapons and armor wear down permanently now. Weapons are repaired with craftable Mending Kits, one tier per material, which top the weapon back up but lower its maximum durability a little each time. Armor repairs never fail and cost a flat chunk of maximum durability instead. Either one can eventually break and disappear for good if repaired past its limit, so gear has a real lifespan on this shard.</p>
+        <p>Weapons and armor wear down permanently now. Weapons are repaired with craftable Mending Kits, one tier per material, which top the weapon back up but lower its maximum durability a little each time. Armor repairs never fail and cost a flat chunk of maximum durability(10) instead. Either one can eventually break and disappear for good if repaired past its limit, so gear has a real lifespan on this shard.</p>
 
         <h3>Threat &amp; Roles</h3>
         <p>A real threat system drives monster targeting shard-wide, replacing the old "whoever's closest or hit me last" logic. Pets and summons can be set to <strong>Tank</strong>, <strong>Ranged</strong>, or <strong>Melee</strong> from their Animal Lore panel. Tank generates dramatically more threat and holds aggro on its own, while Ranged and Melee generate far less, letting them fight alongside a tank safely. Taunt (on the pets that have it) forces a guaranteed threat spike plus a brief lock window that can't be broken.</p>
-        <div class="callout">Healing threat isn't factored in yet. Only damage builds threat right now, so an eager healer can still pull aggro off the tank.</div>
+        
       </section>
 
       <section id="taming">
@@ -603,7 +603,7 @@
           <li><strong>Ranged</strong>: casters and archers that hold distance (e.g. TempestDrake, Mysticwyrm, Sagefang)</li>
           <li><strong>Melee</strong>: straightforward damage dealers (e.g. Bloodfang)</li>
         </ul>
-        <p>A number of elemental-themed pairs (fire, ice, poison, storm, and more) exist without a fixed role.</p>
+        <p>A number of elemental-themed pairs (fire, ice, poison, storm, and more) exist without a fixed role and can be set to any.</p>
 
         <h3>Pet leveling</h3>
         <p>Custom pets gain their own levels, separate from their stock stats, as they fight beside you, earning points to spend into their Strength, Dexterity, and Intelligence. How high a pet can level is tied to <em>your</em> Animal Taming skill: higher skill raises the cap your pets can reach. If you want to change how a pet's points were spent, a respec option is available.</p>
@@ -624,7 +624,7 @@
         <p>Magery's summon spells got real attention: <strong>Fire Elemental</strong> and <strong>Earth Elemental</strong> have been reworked into stronger, more reliable companions. Several bugs that left summons spawning anywhere from 71% to nearly 200% of their intended health are fixed. The other four Magery summon types haven't been touched yet.</p>
         <ul>
           <li><strong>Spirit Speak</strong> is the summoner's real investment skill now: every full 10 points adds 1% summon power (capped at 12% at 120 skill) and 2 minutes of duration. 100 Spirit Speak = +10% power and 20 minutes.</li>
-          <li>Monsters can no longer dispel your summons, whether by melee contact or spellcasting. Dispel can now only come from another player's Dispel or Mass Dispel spell.</li>
+          <li>Monsters can no longer dispel your summons, whether by melee contact or spellcasting.</li>
           <li>Casting a 7th or 8th Circle Magery spell at GM skill (100) now always succeeds, a quality-of-life change for every high-end caster, not just summoners.</li>
           <li>Mounts cost 0 follower slots on this shard, so riding one never competes with your summons for space.</li>
           <li>Fire Elemental and Earth Elemental can be set to a Tank, Ranged, or Melee role too. See <a href="#combat-mechanics">Combat Mechanics</a>.</li>
@@ -706,8 +706,8 @@
           <p>A fire-themed dungeon, similarly spread across all four difficulty tiers.</p>
         </div>
         <div class="region">
-          <h3>Underworld</h3>
-          <p>Currently offers Medium and Hard content. Its harder Miniboss/Boss tiers and the paired Stygian Abyss dungeon are still in development. (NOT SPAWNED)</p>
+          <h3>Rock Dungeon</h3>
+          <p>Currently offers mostly Medium and some Hard content. The normal entrance has been magically gated to felucca and can be entered from the custom map somewhere...</p>
         </div>
         <div class="region">
           <h3>Wilderness</h3>
@@ -719,7 +719,7 @@
         </div>
 
         <h3>Getting Around</h3>
-        <p>Public moongates in Felucca lead to shard-specific destinations (Conim, Cido, Insidious, Ignis, Radius) rather than the standard city list; moongates on every other facet work normally. <em>Currently broken. Fix in progress.</em> The "stuck" menu always drops you in Felucca near Conim regardless of where you started. Teleport ropes found around the world can be used even while you're a ghost. Crystal Portals now use a simple button menu instead of speech commands. Mark and Recall no longer require any Magery skill to succeed, though Gate Travel still does.</p>
+        <p>Public moongates in Felucca lead to shard-specific destinations (Conim, Cido, Insidious, Ignis, Radius) rather than the standard city list; moongates for Trammel work normally.  The "stuck" menu always drops you in Felucca near Conim regardless of where you started. Teleport ropes found around the world can be used even while you're a ghost. Crystal Portals now use a simple button menu instead of speech commands. Mark and Recall no longer require any Magery skill to succeed, though Gate Travel still does.</p>
 
         <div class="callout">Not everything out there shows up on a map. Some of the more remote corners of the world are rumored to hold something far tougher than the usual wildlife. You won't get a warning before you stumble into it.</div>
       </section>
@@ -751,7 +751,7 @@
           <li><strong>Sockets &amp; Gems:</strong> weapons and helmets can hold Fusion Gems for further bonuses. Double-click a gem, target the item, then fill or replace a slot.</li>
           <li><strong>Material Storage:</strong> a house-locked furnishing that pools raw materials, reagents, and tools by quantity. Crafting near an accessible one pulls any shortfall automatically if your backpack comes up short.</li>
         </ul>
-        <div class="callout">Gem acquisition isn't live yet. The socketing system works, just not the part where you'd normally get one.</div>
+       
 
         <h3>Recipe &amp; Trade Changes</h3>
         <ul>
@@ -779,12 +779,12 @@
               <tr><td class="cmd">[polyspec</td><td>Open your PolySpec manager: save, load, rename, and reorder your saved builds</td></tr>
               <tr><td class="cmd">[quest</td><td>Open your personal quest log: progress, turn-in status, and abandon</td></tr>
               <tr><td class="cmd">[PetPull</td><td>Teleport all your pets to your location</td></tr>
-              <tr><td class="cmd">[dip</td><td>A convenient, quick way to escape or reposition when needed. Also brings your pets along</td></tr>
+              <tr><td class="cmd">[dip</td><td>A convenient, quick way to escape. Also brings your pets along</td></tr>
               <tr><td class="cmd">"stable" <span style="color:var(--text-faint);">(speech)</span></td><td>Open the pet-claim picker at a Stable Master</td></tr>
               <tr><td class="cmd">"stable all" <span style="color:var(--text-faint);">(speech)</span></td><td>Stable every pet currently following you</td></tr>
               <tr><td class="cmd">"claim" <span style="color:var(--text-faint);">(speech)</span></td><td>Same as "stable." Opens the claim picker</td></tr>
               <tr><td class="cmd">Right-click self → Pull Pets</td><td>Same as <span class="cmd" style="white-space:normal;">[PetPull</span></td></tr>
-              <tr><td class="cmd">Animal Lore on a pet</td><td>View that pet's custom level, XP, and role</td></tr>
+              <tr><td class="cmd">Animal Lore on a pet or mob</td><td>View that mobile's custom properties</td></tr>
             </tbody>
           </table>
         </div>
