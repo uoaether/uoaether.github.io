@@ -440,7 +440,9 @@
 	 <div class="hero-eyebrow">An old-school/modern hybrid progression PVE server</div>
       <p>play.uoaether.com (port 2593)</p>
       <br>
-      <p>More info and custom map files available via discord: https://discord.gg/xx2U8xjM3n</p>
+      <p>Download the launcher to patch your client automatically: <a href="https://drive.google.com/file/d/1CPGKmGnCgn6FCXb9Pu_20TL0fuVYy_DA/view?usp=sharing">UOAether Launcher</a></p>
+      <br>
+      <p>More info and community discussion on Discord: https://discord.gg/xx2U8xjM3n</p>
       <br>
       <p>Note: This server is currently in BUILDING and TESTING phase. Feel free to join in and help shape the world!</p>
       <div class="hero-rule"></div>
@@ -457,6 +459,7 @@
           <li><strong>Human only.</strong> Elf and Gargoyle are not available as starting races.</li>
           <li><strong>Every new character starts with a full spellbook.</strong> Regardless of your starting template or skill picks, you begin with a Magery spellbook already containing every spell across all eight circles. No need to train Inscription or track down scrolls just to fill it in.</li>
           <li><strong>Five skills are disabled shard-wide</strong> and cannot be trained by any means: Bushido, Ninjitsu, Spellweaving, Mysticism, and Throwing. They won't appear as usable starting skills, and normal skill gain won't raise them even if you try.</li>
+          <li><strong>NPC skill trainers now teach much further than stock UO allowed.</strong> A real help for getting a brand-new character off the ground quickly.</li>
         </ul>
       </section>
 
@@ -580,6 +583,9 @@
         <h3>Archery &amp; Weapon Timing</h3>
         <p>All Bows and Crossbows swing 40% faster than other weapon types, an innate bonus that stacks with every other swing-speed bonus you have. Separately, the classic "instahit" mechanic is back: unequipping a weapon doesn't reset its swing timer, so a timer already counting down keeps ticking no matter what's in your hands. Re-equip once it's expired and your very next swing lands instantly.</p>
 
+        <h3>Weapon &amp; Armor Decay</h3>
+        <p>Weapons and armor wear down permanently now. Weapons are repaired with craftable Mending Kits, one tier per material, which top the weapon back up but lower its maximum durability a little each time. Armor repairs never fail and cost a flat chunk of maximum durability instead. Either one can eventually break and disappear for good if repaired past its limit, so gear has a real lifespan on this shard.</p>
+
         <h3>Threat &amp; Roles</h3>
         <p>A real threat system drives monster targeting shard-wide, replacing the old "whoever's closest or hit me last" logic. Pets and summons can be set to <strong>Tank</strong>, <strong>Ranged</strong>, or <strong>Melee</strong> from their Animal Lore panel. Tank generates dramatically more threat and holds aggro on its own, while Ranged and Melee generate far less, letting them fight alongside a tank safely. Taunt (on the pets that have it) forces a guaranteed threat spike plus a brief lock window that can't be broken.</p>
         <div class="callout">Healing threat isn't factored in yet. Only damage builds threat right now, so an eager healer can still pull aggro off the tank.</div>
@@ -645,6 +651,12 @@
         <h3>Power Scrolls</h3>
         <p>Power Scrolls drop from ordinary kills shard-wide, not just from champion spawns or specific bosses. Tougher creatures have a meaningfully better chance: the drop odds scale directly with how dangerous a creature is. The scroll pool itself has also been reshaped for this shard. Some skills that never had Power Scrolls in stock Ultima Online (Carpentry, Tinkering, Fletching, Inscription) now do, and a handful of skills that don't exist on this shard at all were removed from the pool entirely.</p>
 
+        <h3>PvM Spellbooks</h3>
+        <p>Mages can now find or craft real magic-tier spellbooks, the same way warriors get magic weapons. They roll Mana Regen and Spell Damage bonuses instead of holding spells, and carry their own durability that wears down with each successful cast rather than each hit.</p>
+
+        <h3>Auraflux</h3>
+        <p>A stackable resource extracted from found or looted magic gear (never from anything crafted) using the Salvage Bag's Salvage option, which no longer needs a forge or tools nearby. What Auraflux is actually for is still being decided, same as Aether Shards below.</p>
+
         <h3>Aether Shards</h3>
         <p>A separate, rarer drop that can appear on the same kills as Power Scrolls, following the same difficulty-based odds. What Aether Shards are actually <em>for</em> is still being decided. Right now they're a valuable curiosity worth holding onto rather than a currency with a fixed use yet. <span style="color:var(--text-faint);">(Not to be confused with Aether Vials, the currency used for the Aether attunement system above. Shards and Vials are two separate items.)</span></p>
       </section>
@@ -708,7 +720,7 @@
         </div>
 
         <h3>Getting Around</h3>
-        <p>Public moongates in Felucca lead to shard-specific destinations (Conim, Cido, Insidious, Ignis, Radius) rather than the standard city list; moongates on every other facet work normally. <em>Currently broken. Fix in progress.</em> The "stuck" menu always drops you in Felucca near Conim regardless of where you started. Teleport ropes found around the world can be used even while you're a ghost.</p>
+        <p>Public moongates in Felucca lead to shard-specific destinations (Conim, Cido, Insidious, Ignis, Radius) rather than the standard city list; moongates on every other facet work normally. <em>Currently broken. Fix in progress.</em> The "stuck" menu always drops you in Felucca near Conim regardless of where you started. Teleport ropes found around the world can be used even while you're a ghost. Crystal Portals now use a simple button menu instead of speech commands. Mark and Recall no longer require any Magery skill to succeed, though Gate Travel still does.</p>
 
         <div class="callout">Not everything out there shows up on a map. Some of the more remote corners of the world are rumored to hold something far tougher than the usual wildlife. You won't get a warning before you stumble into it.</div>
       </section>
@@ -738,6 +750,7 @@
           <li>A crafted item starts from a completely clean slate. No random elemental damage split, no stray stock bonuses riding along underneath. What you pick is what you get. No craft timer, and you can craft even while overweight.</li>
           <li><strong>Weapon Damage Increase and Swing Speed Increase can now be picked on armor too</strong>, not just weapons. Both stack across everything you have equipped toward your total.</li>
           <li><strong>Sockets &amp; Gems:</strong> weapons and helmets can hold Fusion Gems for further bonuses. Double-click a gem, target the item, then fill or replace a slot.</li>
+          <li><strong>Material Storage:</strong> a house-locked furnishing that pools raw materials, reagents, and tools by quantity. Crafting near an accessible one pulls any shortfall automatically if your backpack comes up short.</li>
         </ul>
         <div class="callout">Gem acquisition isn't live yet. The socketing system works, just not the part where you'd normally get one.</div>
 
