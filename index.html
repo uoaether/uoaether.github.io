@@ -428,8 +428,9 @@
       <li><a href="#world"><span class="toc-num">13</span>World &amp; Dungeons</a></li>
       <li><a href="#champion-spawns"><span class="toc-num">14</span>Champion Spawns</a></li>
       <li><a href="#quests"><span class="toc-num">15</span>Quests</a></li>
-      <li><a href="#crafting"><span class="toc-num">16</span>Crafting</a></li>
-      <li><a href="#commands"><span class="toc-num">17</span>Command Reference</a></li>
+      <li><a href="#emotes"><span class="toc-num">16</span>Emotes</a></li>
+      <li><a href="#crafting"><span class="toc-num">17</span>Crafting</a></li>
+      <li><a href="#commands"><span class="toc-num">18</span>Command Reference</a></li>
     </ul>
   </nav>
 
@@ -657,6 +658,9 @@
         <h3>Auraflux</h3>
         <p>A stackable resource extracted from found or looted magic gear (never from anything crafted) using the Salvage Bag's Salvage option, which no longer needs a forge or tools nearby. What Auraflux is actually for is still being decided, same as Aether Shards below.</p>
 
+        <h3>Rare Dyes</h3>
+        <p>A rare drop from tough enough creatures: five single-use dye types (Hair/Beard, Gear, Books, Backpack, Furniture), each rolling one fixed color from a large palette. Applying one always asks you to confirm first, and it overwrites any existing color, natural material colors included. A Rare Dye Stash, purchasable in the Item Shop, can hold your collection until you're ready to use them.</p>
+
         <h3>Aether Shards</h3>
         <p>A separate, rarer drop that can appear on the same kills as Power Scrolls, following the same difficulty-based odds. What Aether Shards are actually <em>for</em> is still being decided. Right now they're a valuable curiosity worth holding onto rather than a currency with a fixed use yet. <span style="color:var(--text-faint);">(Not to be confused with Aether Vials, the currency used for the Aether attunement system above. Shards and Vials are two separate items.)</span></p>
       </section>
@@ -676,6 +680,7 @@
         <ul>
           <li><strong>Wall Safes</strong>: a placeable house item, purchasable here, that lets you access your bank box remotely by double-clicking it. No trip to an actual bank required.</li>
           <li><strong>Swift Footwear</strong>: Swift Sandals, Shoes, Thigh Boots, and Boots grant permanent mount-speed movement while worn, no toggling required. Blessed and dyeable.</li>
+          <li><strong>Rare Dye Stash</strong>: purchasable here, stores your Rare Dyes until you're ready to use them. See Notable Loot.</li>
         </ul>
       </section>
 
@@ -707,7 +712,7 @@
         </div>
         <div class="region">
           <h3>Rock Dungeon</h3>
-          <p>Currently offers mostly Medium and some Hard content. The normal entrance has been magically gated to felucca and can be entered from the custom map somewhere...</p>
+          <p>Currently offers mostly Medium and some Hard content. The normal entrance has been magically gated to Felucca and can be entered from the custom map somewhere...</p>
         </div>
         <div class="region">
           <h3>Wilderness</h3>
@@ -738,8 +743,15 @@
         <div class="callout"><strong>Crafting quests are in the pipeline</strong>: a parallel system where you'll turn in crafted items instead of kills. They aren't live yet. Every quest available in-game right now is a kill quest.</div>
       </section>
 
-      <section id="crafting">
+      <section id="emotes">
         <div class="section-eyebrow">16</div>
+        <h2>Emotes</h2>
+        <p>35 unlockable emotes, each a public overhead message plus a matching sound. Type <code>[e</code> followed by an emote's name to perform one you've unlocked, <code>[emotes</code> to browse your collection in a gump, or <code>[emotelist</code> to print it to your journal instead. There's a short shared cooldown between emotes.</p>
+        <p>Emote Deeds (available in the Item Shop, and a rare drop from tough enough creatures) teach one random emote you don't already know when used.</p>
+      </section>
+
+      <section id="crafting">
+        <div class="section-eyebrow">17</div>
         <h2>Crafting</h2>
 
         <h3>Fusion Crafting</h3>
@@ -763,7 +775,7 @@
       </section>
 
       <section id="commands">
-        <div class="section-eyebrow">17</div>
+        <div class="section-eyebrow">18</div>
         <h2>Command Reference</h2>
         <p>Every player-usable command and speech trigger covered on this page, in one place.</p>
         <div class="cmd-table-wrap">
@@ -780,6 +792,13 @@
               <tr><td class="cmd">[quest</td><td>Open your personal quest log: progress, turn-in status, and abandon</td></tr>
               <tr><td class="cmd">[PetPull</td><td>Teleport all your pets to your location</td></tr>
               <tr><td class="cmd">[dip</td><td>A convenient, quick way to escape. Also brings your pets along</td></tr>
+              <tr><td class="cmd">[e <span style="color:var(--text-faint);">&lt;name&gt;</span></td><td>Perform an emote you've unlocked</td></tr>
+              <tr><td class="cmd">[emotes</td><td>Browse your unlocked emotes in a gump</td></tr>
+              <tr><td class="cmd">[emotelist</td><td>Print your unlocked emotes to your journal</td></tr>
+              <tr><td class="cmd">[showdamage</td><td>Cycle your damage-number display: off, mine, or everyone's</td></tr>
+              <tr><td class="cmd">[showheal</td><td>Cycle your heal-number display: off, mine, or everyone's</td></tr>
+              <tr><td class="cmd">[stealthsteps</td><td>Toggle a display of your Prowl-boosted stealth step bonus</td></tr>
+              <tr><td class="cmd">[evadeoverhead</td><td>Toggle overhead messages for the Marksman Evade ability (on by default)</td></tr>
               <tr><td class="cmd">"stable" <span style="color:var(--text-faint);">(speech)</span></td><td>Open the pet-claim picker at a Stable Master</td></tr>
               <tr><td class="cmd">"stable all" <span style="color:var(--text-faint);">(speech)</span></td><td>Stable every pet currently following you</td></tr>
               <tr><td class="cmd">"claim" <span style="color:var(--text-faint);">(speech)</span></td><td>Same as "stable." Opens the claim picker</td></tr>
