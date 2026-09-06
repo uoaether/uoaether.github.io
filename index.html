@@ -297,6 +297,88 @@
   }
   .callout strong{ color: var(--text); }
 
+  /* ---------- Screenshots ---------- */
+  .shot-row{
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+  }
+  .shot{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 10px 10px 12px;
+    max-width: 100%;
+    cursor: zoom-in;
+    transition: transform .18s ease, border-color .18s ease;
+  }
+  .shot:hover{
+    transform: translateY(-3px);
+    border-color: var(--rule);
+  }
+  .shot img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+  }
+  .shot-caption{
+    margin-top: 9px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--text-faint);
+  }
+  .shot--map{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: zoom-in;
+  }
+  .shot--map img{
+    max-width: 100%;
+    filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55));
+  }
+  .lightbox{
+    position: fixed;
+    inset: 0;
+    background: rgba(6,7,11,0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    z-index: 999;
+    cursor: zoom-out;
+    animation: lightbox-fade .12s ease;
+  }
+  @keyframes lightbox-fade{ from{ opacity:0; } to{ opacity:1; } }
+  .lightbox img{
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  /* ---------- Hero brand ---------- */
+  .hero-brand{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 4px;
+  }
+  .hero-brand h1{ margin: 0; }
+  .hero-logo{
+    height: 76px;
+    width: auto;
+    flex-shrink: 0;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.5));
+  }
+  @media (max-width: 640px){
+    .hero-logo{ height: 54px; }
+    .hero-brand{ gap: 14px; }
+  }
+
   /* ---------- Region cards ---------- */
   .region{
     background: var(--panel);
@@ -437,7 +519,10 @@
   <main>
     <div class="hero">
       
-      <h1>UOAether</h1>
+      <div class="hero-brand">
+        <img src="images/uoaether-logo.webp" alt="UOAether crest" class="hero-logo">
+        <h1>UOAether</h1>
+      </div>
 	 <div class="hero-eyebrow">An old-school/modern hybrid progression PVE server</div>
       <p>play.uoaether.com (port 2593)</p>
       <br>
@@ -496,6 +581,13 @@
 
         <h3>Accessing it</h3>
         <p>Type <code>[aether</code> to open your Aether Attunement screen. It shows your banked level in every aether type, not just your current two, lets you reassign your Primary/Secondary slots, and breaks down your current bonuses. A minimum resolution of 1920×1080 is recommended for the panel to display properly.</p>
+
+        <div class="shot-row">
+          <div class="shot">
+            <img src="images/aether-attunement.webp" alt="Aether Attunement screen showing a Marksman Aether at level 11 with tier progression and defense stats">
+            <div class="shot-caption">AETHER ATTUNEMENT</div>
+          </div>
+        </div>
       </section>
 
       <section id="polyspec">
@@ -510,6 +602,13 @@
           <li>Save your current build into an open slot, then load it back again at any point later.</li>
           <li>Give each spec its own name, and reorder your saved specs however you'd like them listed.</li>
         </ul>
+
+        <div class="shot-row">
+          <div class="shot">
+            <img src="images/polyspec-gump.webp" alt="PolySpec Management gump comparing current skills to a saved spec slot">
+            <div class="shot-caption">POLYSPEC MANAGEMENT</div>
+          </div>
+        </div>
 
         <div class="callout">Switching to a different spec has a short cooldown, so it can't be used to swap builds instantly mid-fight. Think of it as changing your loadout between engagements, not during one.</div>
 
@@ -556,6 +655,13 @@
 
         <h3>Accessing it</h3>
         <p>Type <code>[perks</code> to open your Perks panel. It shows every category's progress, lets you set your Training target, spend Aether Shards to unlock eligible levels, and choose which unlocked levels are currently active.</p>
+
+        <div class="shot-row">
+          <div class="shot">
+            <img src="images/perks-gump.webp" alt="Perks panel showing 10 of 10 active perks across categories like Melee Damage and Swing Speed">
+            <div class="shot-caption">PERKS PANEL</div>
+          </div>
+        </div>
       </section>
 
       <section id="bonus-tracker">
@@ -574,6 +680,13 @@
 
         <h3>Accessing it</h3>
         <p>Type <code>[bonuses</code> (or its alias <code>[mystats</code>) to open the panel at any time.</p>
+
+        <div class="shot-row">
+          <div class="shot">
+            <img src="images/bonus-tracker-gump.webp" alt="Combat Bonus Tracker showing accuracy, swing speed, weapon damage, and damage resist breakdowns">
+            <div class="shot-caption">BONUS TRACKER</div>
+          </div>
+        </div>
       </section>
 
       <section id="combat-mechanics">
@@ -695,12 +808,25 @@
           <li>Works across compatible slots: the same layer, or matching groups (any torso-layer piece onto any other torso-layer piece, same for legs). Shields can borrow other shields' looks; weapons can't be used this way, since weapon art drives your swing animation.</li>
           <li>A few special appearance-only pieces exist that hide a slot entirely. The item stays equipped and keeps its stats, it just renders nothing.</li>
         </ul>
+
+        <div class="shot-row">
+          <div class="shot">
+            <img src="images/transmog-gump.webp" alt="Transmog panel choosing an adventurer's tunic appearance over a doublet, keeping the doublet's stats">
+            <div class="shot-caption">TRANSMOG</div>
+          </div>
+        </div>
       </section>
 
       <section id="world">
         <div class="section-eyebrow">13</div>
         <h2>World &amp; Dungeons</h2>
         <p>Several custom regions and dungeons exist beyond the standard map, each with tiered difficulty: typically Medium → Hard → Elite → Legendary.</p>
+
+        <div class="shot-row">
+          <div class="shot shot--map">
+            <img src="images/world-map.webp" alt="Custom world map showing the mainland, Radius, and the northern and western island regions">
+          </div>
+        </div>
 
         <div class="region">
           <h3>Insidious Dungeon</h3>
@@ -763,7 +889,13 @@
           <li><strong>Sockets &amp; Gems:</strong> weapons and helmets can hold Fusion Gems for further bonuses. Double-click a gem, target the item, then fill or replace a slot.</li>
           <li><strong>Material Storage:</strong> a house-locked furnishing that pools raw materials, reagents, and tools by quantity. Crafting near an accessible one pulls any shortfall automatically if your backpack comes up short.</li>
         </ul>
-       
+
+        <div class="shot-row">
+          <div class="shot">
+            <img src="images/fusion-crafting-gump.webp" alt="Fusion Crafting menu crafting a Katana with Valorite, showing mod slots and a live preview">
+            <div class="shot-caption">FUSION CRAFTING</div>
+          </div>
+        </div>
 
         <h3>Recipe &amp; Trade Changes</h3>
         <ul>
@@ -851,6 +983,23 @@
   }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
 
   sections.forEach(s => spy.observe(s));
+
+  // Screenshot lightbox — click a .shot to view its image full size
+  document.querySelectorAll('.shot img').forEach(img => {
+    img.addEventListener('click', () => {
+      const overlay = document.createElement('div');
+      overlay.className = 'lightbox';
+      const big = document.createElement('img');
+      big.src = img.getAttribute('src');
+      big.alt = img.getAttribute('alt') || '';
+      overlay.appendChild(big);
+      overlay.addEventListener('click', () => overlay.remove());
+      document.addEventListener('keydown', function esc(e){
+        if(e.key === 'Escape'){ overlay.remove(); document.removeEventListener('keydown', esc); }
+      });
+      document.body.appendChild(overlay);
+    });
+  });
 </script>
 
 </body>
